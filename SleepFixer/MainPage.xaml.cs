@@ -47,8 +47,8 @@ namespace SleepFixer
             ((CompositeTransform)secondHand.RenderTransform).Rotation = currentTime.Seconds * 6 - 90;
         }
 
-        private void alarm_StartDrag(object sender, MouseButtonEventArgs e)
-        {
+        private void alarm_MouseDown(object sender, MouseButtonEventArgs e)
+        {          
             dragPoint = e.GetPosition(this.clockFaceImage);
         }
 
@@ -138,6 +138,7 @@ namespace SleepFixer
             this.NavigationService.Navigate(new Uri("/AlarmPage.xaml",
                 UriKind.Relative));
         }
+
 
 
     }
