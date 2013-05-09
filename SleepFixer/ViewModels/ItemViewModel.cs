@@ -8,7 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
-namespace Sleep_Fixer.ViewModels
+namespace SleepFixer.ViewModels
 {
     public class ItemViewModel : INotifyPropertyChanged
     {

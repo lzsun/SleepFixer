@@ -2,7 +2,7 @@
 
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US"/>
-  <App xmlns="" ProductID="{fce20faa-4902-416f-888a-f50eb96c4260}" Title="Sleep_Fixer" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="Sleep_Fixer author" Description="Sample description" Publisher="Sleep_Fixer" PublisherID="{f822b9da-f6fd-4d32-b5c2-7b00a7687252}">
+  <App xmlns="" ProductID="{2fcfb491-a7ac-4e66-bebf-f85a6da37a6b}" Title="SleepFixer" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal"  Author="SleepFixer author" Description="Sample description" Publisher="SleepFixer" PublisherID="{4565dba5-ec76-49c4-b330-2ab91e02fd3b}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING"/>
@@ -15,12 +15,12 @@
       <DefaultTask  Name ="_default" NavigationPage="MainPage.xaml"/>
     </Tasks>
     <Tokens>
-      <PrimaryToken TokenID="Sleep_FixerToken" TaskName="_default">
+      <PrimaryToken TokenID="SleepFixerToken" TaskName="_default">
         <TemplateFlip>
           <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
           <Count>0</Count>
           <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
-          <Title>Sleep_Fixer</Title>
+          <Title>SleepFixer</Title>
           <BackContent></BackContent>
           <BackBackgroundImageURI></BackBackgroundImageURI>
           <BackTitle></BackTitle>

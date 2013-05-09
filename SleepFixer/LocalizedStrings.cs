@@ -1,6 +1,6 @@
-﻿using Sleep_Fixer.Resources;
+﻿using SleepFixer.Resources;
 
-namespace Sleep_Fixer
+namespace SleepFixer
 {
     /// <summary>
     /// Provides access to string resources.

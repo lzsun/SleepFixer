@@ -12,30 +12,9 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+    shell:SystemTray.IsVisible="True">
     <phone:PhoneApplicationPage.Resources>
 
-        <Storyboard x:Name="SecondHand" RepeatBehavior="Forever">
-            <DoubleAnimation 
-                Duration="0:1:0" From="0" To="360"
-                Storyboard.TargetName="Sec"
-                Storyboard.TargetProperty="(Image.RenderTransform).(RotateTransform.Angle)"
-                d:IsOptimized="True" />
-        </Storyboard>
-        <Storyboard x:Name="LongHand" RepeatBehavior="Forever">
-            <DoubleAnimation 
-                Duration="1:0:0" From="0" To="360"
-                Storyboard.TargetName="Min"
-                Storyboard.TargetProperty="(Image.RenderTransform).(RotateTransform.Angle)"
-                d:IsOptimized="True" />
-        </Storyboard>
-        <Storyboard x:Name="HourHand" RepeatBehavior="Forever">
-            <DoubleAnimation 
-                Duration="12:0:0" From="0" To="360"
-                Storyboard.TargetName="Hour"
-                Storyboard.TargetProperty="(Image.RenderTransform).(RotateTransform.Angle)"
-                d:IsOptimized="True" />
-        </Storyboard>
 
     </phone:PhoneApplicationPage.Resources>
 
@@ -64,40 +43,33 @@
         <!--Pivot Control-->
         <phone:Pivot Title="Sleep Fixer">
 
-            <phone:PivotItem Header="Alarm">
+            <phone:PivotItem Header="Alarm" Opacity="1">
                 <!--Double line list with text wrapping-->
-                <Grid x:Name="AlarmRoot" Background="Transparent">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-
-                    <!--ContentPanel - place additional content here-->
-                    <Grid x:Name="ContentPanel" Margin="0">
-                        <Image Height="456" HorizontalAlignment="Left" Name="image1" Stretch="Fill" VerticalAlignment="Top" Width="456" Source="/Image/clock01.png" />
-                        <Image Height="246" HorizontalAlignment="Left" Margin="217,35,0,0" Name="Sec" Stretch="Fill" VerticalAlignment="Top" Width="22" Source="/Image/clock01_sec.png" >
-                            <Image.RenderTransform>
-                                <RotateTransform CenterX="11" CenterY="205" Angle="0"></RotateTransform>
-                            </Image.RenderTransform>
-                        </Image>
-                        <Image Height="160" HorizontalAlignment="Left" Margin="194,90,0,0" Name="Hour" Stretch="Fill" VerticalAlignment="Top" Width="68" Source="/Image/clock01_hour.png">
-                            <Image.RenderTransform>
-                                <RotateTransform CenterX="34" CenterY="150" Angle="0"></RotateTransform>
-                            </Image.RenderTransform>
-                        </Image>
-                        <Image Height="188" HorizontalAlignment="Left" Margin="178,62,0,0" Name="Min" Stretch="Fill" VerticalAlignment="Top" Width="100" Source="/Image/clock01_min.png">
-                            <Image.RenderTransform>
-                                <RotateTransform CenterX="50" CenterY="178" Angle="0"></RotateTransform>
-                            </Image.RenderTransform>
-                        </Image>
-                        <TextBlock Height="88" HorizontalAlignment="Left" Margin="0,513,0,0" Name="txtDigitalClock" Text="TextBlock" VerticalAlignment="Top" Width="480" FontSize="64" TextAlignment="Center" />
-                    </Grid>
+                <Grid>
+                    <Image x:Name="clockFaceImage" HorizontalAlignment="Left" Height="398" Margin="46,12,0,0" Grid.Row="1" VerticalAlignment="Top" Width="406" Source="/Images/clock_face.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
+                    <Image x:Name="hourHand" 
+                           HorizontalAlignment="Left" Height="20" Margin="255,203,0,0" Grid.Row="1" VerticalAlignment="Top" Width="99" Source="/Images/hourHand.jpg" RenderTransformOrigin="0.097,0.5">
+                        <Image.RenderTransform>
+                            <CompositeTransform ScaleX="1.5" ScaleY="1.5" TranslateX="-20.15"/>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image x:Name="minuteHand" HorizontalAlignment="Left" Height="24" Margin="231,201,0,0" Grid.Row="1" VerticalAlignment="Top" Width="163.333" Source="/Images/minuteHand.png" RenderTransformOrigin="0.078,0.479">
+                        <Image.RenderTransform>
+                            <CompositeTransform Rotation="0"/>
+                        </Image.RenderTransform>
+                    </Image>
+                    <Image x:Name="secondHand" HorizontalAlignment="Left" Height="17.5" Margin="191.236,207.236,0,0" Grid.Row="1" VerticalAlignment="Top" Width="226" Source="/Images/secondHand.png" RenderTransformOrigin="0.246,0.492" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Image.RenderTransform>
+                            <CompositeTransform Rotation="90" TranslateX="-2.588" TranslateY="-2.592"/>
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock x:Name="Time"></TextBlock>
                 </Grid>
 
             </phone:PivotItem>
 
             <!--Pivot item Stats-->
-            <phone:PivotItem Header="Stats">
+            <phone:PivotItem Header="History">
                 <!--Double line list with text wrapping-->
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}">
                     <phone:LongListSelector.ItemTemplate>
@@ -112,16 +84,16 @@
             </phone:PivotItem>
 
             <!--Pivot item Score-->
-            <phone:PivotItem Header="Score">
+            <phone:PivotItem Header="Stats">
                 <!--Double line list no text wrapping-->
                 <phone:LongListSelector Margin="0,0,-12,0" ItemsSource="{Binding Items}">
                     <phone:LongListSelector.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Margin="0,0,0,17">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="NoWrap" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding LineThree}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
-                            </DataTemplate>
+                        <DataTemplate>
+                            <StackPanel Margin="0,0,0,17">
+                                <TextBlock Text="{Binding LineOne}" TextWrapping="NoWrap" Margin="12,0,0,0" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                                <TextBlock Text="{Binding LineThree}" TextWrapping="NoWrap" Margin="12,-6,0,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                            </StackPanel>
+                        </DataTemplate>
                     </phone:LongListSelector.ItemTemplate>
                 </phone:LongListSelector>
             </phone:PivotItem>
@@ -141,8 +113,8 @@
                 </phone:LongListSelector>
             </phone:PivotItem>
         </phone:Pivot>
-        
-        
+
+
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to

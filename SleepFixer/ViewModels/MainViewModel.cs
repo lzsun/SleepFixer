@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using Sleep_Fixer.Resources;
+using SleepFixer.Resources;
 
-namespace Sleep_Fixer.ViewModels
+namespace SleepFixer.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {

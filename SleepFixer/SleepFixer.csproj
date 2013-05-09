@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FCE20FAA-4902-416F-888A-F50EB96C4260}</ProjectGuid>
+    <ProjectGuid>{2FCFB491-A7AC-4E66-BEBF-F85A6DA37A6B}</ProjectGuid>
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Sleep_Fixer</RootNamespace>
-    <AssemblyName>Sleep Fixer</AssemblyName>
+    <RootNamespace>SleepFixer</RootNamespace>
+    <AssemblyName>SleepFixer</AssemblyName>
     <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
@@ -19,9 +19,9 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>Sleep_Fixer_$(Configuration)_$(Platform).xap</XapFilename>
+    <XapFilename>SleepFixer_$(Configuration)_$(Platform).xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>Sleep_Fixer.App</SilverlightAppEntry>
+    <SilverlightAppEntry>SleepFixer.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
     <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
@@ -121,13 +121,13 @@
     </DesignData>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Images\Thumbs.db" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApplicationIcon.png" />
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -147,21 +147,21 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Background.png" />
-    <Content Include="Image\clock01.png" />
-    <Content Include="Image\clock01_hour.png" />
-    <Content Include="Image\clock01_min.png" />
-    <Content Include="Image\clock01_sec.png" />
-    <Content Include="SplashScreenImage.jpg" />
+    <Content Include="Images\clock01.png" />
+    <Content Include="Images\clock01_hour.png" />
+    <Content Include="Images\clock01_min.png" />
+    <Content Include="Images\clock01_sec.png" />
+    <Content Include="Images\clock_face.jpg" />
+    <Content Include="Images\hourHand.jpg" />
+    <Content Include="Images\minuteHand.png" />
+    <Content Include="Images\secondHand.png" />
+    <Content Include="Images\thCAIHUUYW.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />

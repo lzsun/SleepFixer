@@ -1,7 +1,7 @@
 ﻿<vm:MainViewModel
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:vm="clr-namespace:Sleep_Fixer.ViewModels"
+    xmlns:vm="clr-namespace:SleepFixer.ViewModels"
     SampleProperty="Sample Text Property Value">
 
     <vm:MainViewModel.Items>
