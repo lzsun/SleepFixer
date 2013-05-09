@@ -12,7 +12,7 @@ using System.Windows.Threading;
 using System.Windows.Media;
 using System.Windows.Input;
 
-namespace Sleep_Fixer
+namespace SleepFixer
 {
     public partial class MainPage : PhoneApplicationPage
     {
@@ -25,7 +25,11 @@ namespace Sleep_Fixer
 
             PhoneApplicationService phoneAppService = PhoneApplicationService.Current;
             phoneAppService.UserIdleDetectionMode = IdleDetectionMode.Disabled;
+            
+            //Test Data
+            updateAlarm(new DateTime(1,1,1,8,0,0));
 
+            //Load Time
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
@@ -43,17 +47,17 @@ namespace Sleep_Fixer
             ((CompositeTransform)secondHand.RenderTransform).Rotation = currentTime.Seconds * 6 - 90;
         }
 
-        private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void alarm_StartDrag(object sender, MouseButtonEventArgs e)
         {
             dragPoint = e.GetPosition(this.clockFaceImage);
         }
 
-        private void clockFaceImage_ManipulationStarted(object sender, ManipulationDeltaEventArgs e)
+        private void alarm_Drag(object sender, ManipulationDeltaEventArgs e)
         {
             // Convert the click position to the ordinary de cartesan coordinate, 
             // so that we can easily calculate the tangent value, hence the angle value.
-            //Point position = e.GetPosition(this.clockFaceImage); 
             Point position = e.CumulativeManipulation.Translation;
+            //Add offset
             position.X += dragPoint.X;
             position.Y += dragPoint.Y;
                     
@@ -65,8 +69,27 @@ namespace Sleep_Fixer
             double tappedAngle = 180 - Math.Atan2(position.X, position.Y) * 180 / Math.PI;
             //Round to  5 mins.
             tappedAngle = Math.Round(tappedAngle / 2.5) * 2.5;
-            Time.Text = new DateTime(1, 1, 1, Convert.ToInt32(Math.Floor(tappedAngle / 30)), Convert.ToInt32((tappedAngle - Math.Floor(tappedAngle / 30) *30) * 2), 0).ToString("hh:mmtt");
-            ((CompositeTransform)alarmHand.RenderTransform).Rotation = tappedAngle - 90;
+
+            int hour= Convert.ToInt32(Math.Floor(tappedAngle / 30)) ;
+            int minute = Convert.ToInt32((tappedAngle - Math.Floor(tappedAngle / 30) * 30) * 2);
+            if (DateTime.Now.Hour < 12)
+            {
+                //AM
+                if (hour < DateTime.Now.Hour || (hour == DateTime.Now.Hour && minute < DateTime.Now.Minute)) 
+                    hour += 12;
+            }
+            else
+            {
+                //PM
+                if (hour + 12 < DateTime.Now.Hour || (hour + 12 == DateTime.Now.Hour && minute < DateTime.Now.Minute))
+                    hour -= 12;
+            }
+            
+            updateAlarm(new DateTime(1, 1, 1, hour, minute, 0));
+            //Convert.ToInt32(Math.Floor(tappedAngle / 30)) + (isPm ? 12 :0)
+
+            
+            
 
             /*this.angleToGo = tappedAngle;
 
@@ -93,6 +116,27 @@ namespace Sleep_Fixer
 
                 this.clockHandDispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             }*/
+        }
+
+        private void timePicker_ValueChanged(object sender, DateTimeValueChangedEventArgs e)
+        {
+            updateAlarm(e.NewDateTime);
+        }
+
+        private void updateAlarm(DateTime ?time)
+        {
+            if (time != null)
+            {
+                alarmTime.Value = time;
+                ((CompositeTransform)alarmHand.RenderTransform).Rotation = ((DateTime)time).Hour * 30 + ((DateTime)time).Minute / 2 - 90;
+            }
+           
+        }
+
+        private void setAlarm_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/AlarmPage.xaml",
+                UriKind.Relative));
         }
 
 
