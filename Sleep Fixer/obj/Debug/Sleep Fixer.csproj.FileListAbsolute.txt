@@ -1,0 +1,18 @@
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\Bin\Debug\Assets\ApplicationIcon.png
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\Bin\Debug\Assets\Tiles\FlipCycleTileLarge.png
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\Bin\Debug\Assets\Tiles\FlipCycleTileSmall.png
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\Bin\Debug\Assets\Tiles\IconicTileMediumLarge.png
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\Bin\Debug\Assets\Tiles\IconicTileSmall.png
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\Bin\Debug\Sleep Fixer.dll
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\Bin\Debug\Sleep Fixer.pdb
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\Bin\Debug\AppManifest.xaml
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\Bin\Debug\Sleep_Fixer_Debug_AnyCPU.xap
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\obj\Debug\App.g.cs
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\obj\Debug\MainPage.g.cs
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\obj\Debug\Sleep Fixer.g.resources
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\obj\Debug\Sleep_Fixer.Resources.AppResources.resources
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\obj\Debug\Sleep Fixer.csproj.GenerateResource.Cache
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\obj\Debug\Sleep Fixer.dll
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\obj\Debug\Sleep Fixer.pdb
+D:\Users\mifan\Documents\Visual Studio 2012\Projects\Sleep Fixer\Sleep Fixer\obj\Debug\XapCacheFile.xml
