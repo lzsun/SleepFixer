@@ -7,16 +7,16 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Sleep_Fixer.Resources;
+using SleepFixer.Resources;
 using System.Windows.Threading;
 
-namespace Sleep_Fixer
+namespace SleepFixer
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class AlarmPage : PhoneApplicationPage
     {
         
         // Constructor
-        public MainPage()
+        public AlarmPage()
         {
             InitializeComponent();
 
