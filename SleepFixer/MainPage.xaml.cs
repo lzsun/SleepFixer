@@ -7,7 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using Sleep_Fixer.Resources;
+using SleepFixer.Resources;
 using System.Windows.Threading;
 using System.Windows.Media;
 using System.Windows.Input;
@@ -16,7 +16,8 @@ namespace Sleep_Fixer
 {
     public partial class MainPage : PhoneApplicationPage
     {
-
+        private Point dragPoint;
+        
         // Constructor
         public MainPage()
         {
@@ -44,17 +45,28 @@ namespace Sleep_Fixer
 
         private void Image_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            dragPoint = e.GetPosition(this.clockFaceImage);
+        }
+
+        private void clockFaceImage_ManipulationStarted(object sender, ManipulationDeltaEventArgs e)
+        {
             // Convert the click position to the ordinary de cartesan coordinate, 
             // so that we can easily calculate the tangent value, hence the angle value.
-            Point position = e.GetPosition(this.clockFaceImage);
+            //Point position = e.GetPosition(this.clockFaceImage); 
+            Point position = e.CumulativeManipulation.Translation;
+            position.X += dragPoint.X;
+            position.Y += dragPoint.Y;
+                    
             position.X -= this.clockFaceImage.Width / 2;
             position.Y -= this.clockFaceImage.Height / 2;
 
             // Get the angle between the current tap position and 12 o'clock. 
             // Multiplying by 180 / Math.PI is to convert the arctan result from radius to degree.
             double tappedAngle = 180 - Math.Atan2(position.X, position.Y) * 180 / Math.PI;
-            tappedAngle = Math.Round(tappedAngle / 6) * 6;
-            Time.Text = tappedAngle.ToString();
+            //Round to  5 mins.
+            tappedAngle = Math.Round(tappedAngle / 2.5) * 2.5;
+            Time.Text = new DateTime(1, 1, 1, Convert.ToInt32(Math.Floor(tappedAngle / 30)), Convert.ToInt32((tappedAngle - Math.Floor(tappedAngle / 30) *30) * 2), 0).ToString("hh:mmtt");
+            ((CompositeTransform)alarmHand.RenderTransform).Rotation = tappedAngle - 90;
 
             /*this.angleToGo = tappedAngle;
 
@@ -82,6 +94,7 @@ namespace Sleep_Fixer
                 this.clockHandDispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
             }*/
         }
+
 
     }
 

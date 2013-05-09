@@ -147,6 +147,7 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Images\alarmSelection.png" />
     <Content Include="Images\clock01.png" />
     <Content Include="Images\clock01_hour.png" />
     <Content Include="Images\clock01_min.png" />

@@ -46,24 +46,37 @@
             <phone:PivotItem Header="Alarm" Opacity="1">
                 <!--Double line list with text wrapping-->
                 <Grid>
-                    <Image x:Name="clockFaceImage" HorizontalAlignment="Left" Height="398" Margin="46,12,0,0" Grid.Row="1" VerticalAlignment="Top" Width="406" Source="/Images/clock_face.jpg" MouseLeftButtonDown="Image_MouseLeftButtonDown"/>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Image x:Name="clockFaceImage" HorizontalAlignment="Left" Height="398" Margin="10,0,0,0" Grid.Row="0" VerticalAlignment="Top" Width="406" Source="/Images/clock_face.jpg" ManipulationDelta="clockFaceImage_ManipulationStarted" MouseLeftButtonDown="Image_MouseLeftButtonDown">
+                        <Image.RenderTransform>
+                            <CompositeTransform ScaleX="1.08" ScaleY="1.08" />
+                        </Image.RenderTransform>
+                    </Image>
                     <Image x:Name="hourHand" 
-                           HorizontalAlignment="Left" Height="20" Margin="255,203,0,0" Grid.Row="1" VerticalAlignment="Top" Width="99" Source="/Images/hourHand.jpg" RenderTransformOrigin="0.097,0.5">
+                           HorizontalAlignment="Left" Height="20" Margin="227,205,0,0" Grid.Row="0" VerticalAlignment="Top" Width="99" Source="/Images/hourHand.jpg" RenderTransformOrigin="0.097,0.5">
                         <Image.RenderTransform>
-                            <CompositeTransform ScaleX="1.5" ScaleY="1.5" TranslateX="-20.15"/>
+                            <CompositeTransform ScaleX="1.4" ScaleY="1.4" TranslateX="-20.15"/>
                         </Image.RenderTransform>
                     </Image>
-                    <Image x:Name="minuteHand" HorizontalAlignment="Left" Height="24" Margin="231,201,0,0" Grid.Row="1" VerticalAlignment="Top" Width="163.333" Source="/Images/minuteHand.png" RenderTransformOrigin="0.078,0.479">
+                    <Image x:Name="minuteHand" HorizontalAlignment="Left" Height="24" Margin="203,203,0,0" Grid.Row="0" VerticalAlignment="Top" Width="163.333" Source="/Images/minuteHand.png" RenderTransformOrigin="0.078,0.479">
                         <Image.RenderTransform>
-                            <CompositeTransform Rotation="0"/>
+                            <CompositeTransform ScaleX="1.1" ScaleY="1.1" Rotation="0"/>
                         </Image.RenderTransform>
                     </Image>
-                    <Image x:Name="secondHand" HorizontalAlignment="Left" Height="17.5" Margin="191.236,207.236,0,0" Grid.Row="1" VerticalAlignment="Top" Width="226" Source="/Images/secondHand.png" RenderTransformOrigin="0.246,0.492" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                    <Image x:Name="secondHand" HorizontalAlignment="Left" Height="17.5" Margin="163.236,207.236,0,0" Grid.Row="0" VerticalAlignment="Top" Width="226" Source="/Images/secondHand.png" RenderTransformOrigin="0.246,0.492" UseLayoutRounding="False" d:LayoutRounding="Auto">
                         <Image.RenderTransform>
                             <CompositeTransform Rotation="90" TranslateX="-2.588" TranslateY="-2.592"/>
                         </Image.RenderTransform>
                     </Image>
-                    <TextBlock x:Name="Time"></TextBlock>
+                    <Image x:Name="alarmHand" HorizontalAlignment="Left" Height="16" Margin="203,208,0,0" Grid.Row="0" VerticalAlignment="Top" Width="206" Source="/Images/alarmSelection.png" RenderTransformOrigin="0.078,0.492" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                        <Image.RenderTransform>
+                            <CompositeTransform Rotation="180" TranslateX="-2.588" />
+                        </Image.RenderTransform>
+                    </Image>
+                    <TextBlock x:Name="Time" Grid.Row="1" Text="test"></TextBlock>
                 </Grid>
 
             </phone:PivotItem>
