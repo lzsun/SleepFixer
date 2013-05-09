@@ -69,6 +69,8 @@ namespace SleepFixer
             double tappedAngle = 180 - Math.Atan2(position.X, position.Y) * 180 / Math.PI;
             //Round to  5 mins.
             tappedAngle = Math.Round(tappedAngle / 2.5) * 2.5;
+            if (tappedAngle == 360)
+                tappedAngle = 0;
 
             int hour= Convert.ToInt32(Math.Floor(tappedAngle / 30)) ;
             int minute = Convert.ToInt32((tappedAngle - Math.Floor(tappedAngle / 30) * 30) * 2);
@@ -81,10 +83,10 @@ namespace SleepFixer
             else
             {
                 //PM
-                if (hour + 12 < DateTime.Now.Hour || (hour + 12 == DateTime.Now.Hour && minute < DateTime.Now.Minute))
-                    hour -= 12;
+                if (hour + 12 > DateTime.Now.Hour || (hour + 12 == DateTime.Now.Hour && minute > DateTime.Now.Minute))
+                    hour += 12;
             }
-            
+
             updateAlarm(new DateTime(1, 1, 1, hour, minute, 0));
             //Convert.ToInt32(Math.Floor(tappedAngle / 30)) + (isPm ? 12 :0)
 
