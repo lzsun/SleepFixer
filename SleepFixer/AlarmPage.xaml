@@ -14,28 +14,43 @@
     shell:SystemTray.IsVisible="True">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="421*"/>
-            <ColumnDefinition Width="59*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28" Grid.ColumnSpan="2">
-            <TextBlock Text="Sleep Fixer" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Alarm Clock" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-            <TextBlock x:Name="Txb_timedisplay" Text="12:52 AM" Margin="9,-7,0,0" Height="153" FontSize="90"/>
-            <TextBlock Name="Txb_timeremain" TextWrapping="Wrap" Text="5/9/2013 7:28:00 AM" FontSize="40" Height="53" Margin="0,0,12,0"/>
+        <TextBlock Text="Sleep Fixer" Style="{StaticResource PhoneTextNormalStyle}" Grid.Row="0"/>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Alarm Time:" Style="{StaticResource PhoneTextTitle1Style}" TextAlignment="Center"/>
+            <TextBlock x:Name="alarmTimeText" Text="12:00AM"  Style="{StaticResource PhoneTextTitle1Style}" TextAlignment="Center" />
+            <Grid  Margin="20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Time left: " FontSize="40" Grid.Column="0"/>
+                <TextBlock Name="remainText" Text="7:50:50" Grid.Column="1" FontSize="40" Height="53" Margin="0,0,12,0" TextAlignment="Center"/>
+            </Grid>
+            
         </StackPanel>
-
+        <StackPanel  Grid.Row="2">
+            <TextBlock Text="Please flip your phone when you are ready to sleep" HorizontalAlignment="Center" Margin="5"/>
+            <Image Source="/Images/sleep.png" HorizontalAlignment="Center" Width="400" />
+        </StackPanel>
+        
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Margin="0,279,0,0" HorizontalAlignment="Left" Width="480" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Button  Click="Stop" Content="Stop" HorizontalAlignment="Left" Margin="50,301,0,0" VerticalAlignment="Top"/>
-            <Image Source="D:\Users\mifan\Documents\Visual Studio 2012\Projects\Part Function\Part\thCAAJF0JF.jpg" HorizontalAlignment="Left" Height="206" Margin="68,63,0,0" VerticalAlignment="Top" Width="315"/>
-            <Button Click="Snooze" Content="Snooze" HorizontalAlignment="Left" Margin="274,301,0,0" VerticalAlignment="Top"/>
+        <Grid x:Name="ContentPanel" Margin="0,20,0,0" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="Back" Grid.ColumnSpan="2" Click="Back_Click"/>
+            <Button  Click="Stop" Content="Stop" Margin="20,0,20,0" Grid.Column="0"  Visibility="Collapsed"/>
+
+            <Button Click="Snooze" Content="Snooze" Margin="20,0,20,0" Grid.Column="1" Visibility="Collapsed"/>
         </Grid>
     </Grid>
 

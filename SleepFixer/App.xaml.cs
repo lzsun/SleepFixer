@@ -8,6 +8,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using SleepFixer.Resources;
 using SleepFixer.ViewModels;
+using Microsoft.Phone.Scheduler;
 
 namespace SleepFixer
 {
@@ -74,17 +75,18 @@ namespace SleepFixer
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
         }
-
         // Code to execute when the application is launching (eg, from Start)
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            TryRemoveAlarmScheduler();
         }
 
         // Code to execute when the application is activated (brought to foreground)
         // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
+            TryRemoveAlarmScheduler();
             // Ensure that application state is restored appropriately
             if (!App.ViewModel.IsDataLoaded)
             {
@@ -96,14 +98,49 @@ namespace SleepFixer
         // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
+            TryAddAlarmScheduler();
         }
 
         // Code to execute when the application is closing (eg, user hit Back)
         // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            // Ensure that required application state is persisted here.
+            TryAddAlarmScheduler();
         }
+
+        private void TryAddAlarmScheduler()
+        {
+            if (true)
+            //if (Settings.alarmSet.Value)
+            {
+                try
+                {
+                    ScheduledActionService.Add(AlarmPage.alarm);
+                }
+                catch (Exception)
+                {
+                    // Do nothing. 
+                    // Only to prevent the ScheduledActionService from adding the alarm member variable more than once.
+                }
+            }
+        }
+
+        private void TryRemoveAlarmScheduler()
+        {
+            try
+            {
+                // Leave "alarm" as is.
+                // Do not try to replace it with Clock.alarm.Name, which is actually null until the AlarmPage gets initialized.
+                ScheduledActionService.Remove("alarm");
+            }
+            catch (Exception)
+            {
+                // Do nothing. 
+                // Only to prevent the ScheduledActionService from adding the alarm member variable more than once.
+            }
+        }
+
+
 
         // Code to execute if a navigation fails
         private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)

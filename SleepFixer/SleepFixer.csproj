@@ -162,6 +162,7 @@
     <Content Include="Images\hourHand.jpg" />
     <Content Include="Images\minuteHand.png" />
     <Content Include="Images\secondHand.png" />
+    <Content Include="Images\sleep.png" />
     <Content Include="Images\thCAIHUUYW.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />

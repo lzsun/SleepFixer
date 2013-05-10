@@ -21,33 +21,30 @@ namespace SleepFixer
     public partial class AlarmPage : PhoneApplicationPage
     {
 
+        private DateTime alarmTime;
+        public static Alarm alarm;
+
+
         Motion motion;
         DispatcherTimer timer = new DispatcherTimer();
+
+        
         // Constructor
         public AlarmPage()
         {
 
             InitializeComponent();
 
-            //DateTime alarm = DateTime.Now;
+            //alarmTime = new DateTime(2013, 5, 10, 9, 20, 3);
 
-            //string t = DateTime.Now.ToString("t");
-            DateTime t = new DateTime(2013, 5, 9, 9, 20, 3);
-            Txb_timedisplay.Text = t.ToString();
-
-
-
-            // Set the data context of the listbox control to the sample data
-            DataContext = App.ViewModel;
-
-            // Sample code to localize the ApplicationBar
-            //BuildLocalizedApplicationBar();
+            alarmTimeText.Text = alarmTime.ToString("hh:mmtt");
 
             timer.Tick += new EventHandler(timer_Tick);
             timer.Interval = new TimeSpan(0, 0, 1);
             timer.Start();
 
         }
+
 
         /// <summary>
         /// Tick function
@@ -56,22 +53,33 @@ namespace SleepFixer
         /// <param name="e"></param>
         void timer_Tick(object sender, EventArgs e)
         {
-            DateTime dt = Convert.ToDateTime(Txb_timedisplay.Text);
-            // DateTime alarm = Convert.ToDateTime(Txb_timeremain.Text);
-
 
             //Calculate the time, get the time
-            TimeSpan remain = DateTime.Now - dt;
+            TimeSpan remain = alarmTime - DateTime.Now;
 
             //Txb_timeremain.Text = string.Format("{0}:{1}:{2}",alarm.Hour-dt.Hour>0?alarm.Hour:dt.Hour,alarm.Minute-dt.Minute>0?alarm.Minute:dt.Minute,alarm.Second-dt.Second>0?alarm.Second:dt.Second);
             //Txb_timeremain.Text = string.Format("{0}:{1}:{2}", remain.Hours, remain.Minutes, remain.Seconds);
-            Txb_timeremain.Text = Convert.ToString(remain).Substring(1, 7);
+            remainText.Text = remain.ToString(@"hh\:mm\:ss");
         }
 
 
         // Load data for the ViewModel Items
-        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+            //Start Alarm
+            alarmTime = new DateTime(Convert.ToInt64(NavigationContext.QueryString["alarm"]));
+            alarmTimeText.Text = alarmTime.ToString("hh:mmtt");
+
+            AlarmPage.alarm = new Alarm("alarm");
+            AlarmPage.alarm.BeginTime = alarmTime;
+            AlarmPage.alarm.ExpirationTime = DateTime.MaxValue;
+            AlarmPage.alarm.RecurrenceType = RecurrenceInterval.None;
+            AlarmPage.alarm.Sound = new Uri("Audio/alarm.wav", UriKind.Relative);
+            AlarmPage.alarm.Content = "Alarm ringing!";
+            
+
+            //Motion
             // Check to see whether the Motion API is supported on the device.
             if (!Motion.IsSupported)
             {
@@ -131,13 +139,13 @@ namespace SleepFixer
         /// <param name="e"></param>
         private void Snooze(object sender, RoutedEventArgs e)
         {
-            DateTime begin = Convert.ToDateTime(Txb_timeremain.Text);
+            DateTime begin = Convert.ToDateTime(remainText.Text);
             Alarm a = new Alarm("snooze");
             a.BeginTime = begin;
             a.ExpirationTime = begin.AddMinutes(8.0);
             //a.Sound = 
-            Txb_timeremain.Text = (begin.AddMinutes(8.0)).ToString();
-            Txb_timedisplay.Text = (a.ExpirationTime.AddMinutes(8.0)).ToString();
+            remainText.Text = (begin.AddMinutes(8.0)).ToString();
+            //Txb_timedisplay.Text = (a.ExpirationTime.AddMinutes(8.0)).ToString();
         }
 
 
@@ -152,6 +160,11 @@ namespace SleepFixer
         {
             //timer.Stop();
             NavigationService.Navigate(new Uri("blabla.xaml", UriKind.Relative));
+        }
+
+        private void Back_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 
 
