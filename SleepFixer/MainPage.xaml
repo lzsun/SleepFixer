@@ -29,7 +29,11 @@
             <RowDefinition Height="*" />
 
         </Grid.RowDefinitions>
-        <TextBlock Text="Alarm" FontSize="64" Grid.Row="0"/>
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <TextBlock Text="Sleep Fixer" Style="{StaticResource PhoneTextNormalStyle}" />
+            <TextBlock Text="Alarm" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+        </StackPanel>
+       
         <Image x:Name="clockFaceImage" HorizontalAlignment="Left" Height="398" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Top" Width="406" Source="/Images/clock_face.jpg" 
                            ManipulationDelta="alarm_Drag" MouseLeftButtonDown="alarm_MouseDown" >
             <Image.RenderTransform>
@@ -63,7 +67,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="Alarm Clock: " Margin="0,10,0,0" FontSize="36" Grid.Column="0"/>
-            <toolkit:TimePicker x:Name="alarmTime" ValueChanged="timePicker_ValueChanged" Grid.Column="1"/>
+            <toolkit:TimePicker x:Name="alarmTimePicker" ValueChanged="timePicker_ValueChanged" Grid.Column="1"/>
         </Grid>
         <Grid Margin="20,10,20,20" Grid.Row="3" >
             <Grid.ColumnDefinitions>

@@ -17,6 +17,7 @@ namespace SleepFixer
     public partial class MainPage : PhoneApplicationPage
     {
         private Point dragPoint;
+        private DateTime alarmTime;
         
         // Constructor
         public MainPage()
@@ -27,7 +28,7 @@ namespace SleepFixer
             phoneAppService.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             
             //Test Data
-            updateAlarm(new DateTime(1,1,1,8,0,0));
+            updateAlarm(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0));
 
             //Load Time
             DispatcherTimer timer = new DispatcherTimer();
@@ -69,23 +70,28 @@ namespace SleepFixer
             double tappedAngle = 180 - Math.Atan2(position.X, position.Y) * 180 / Math.PI;
             //Round to  5 mins.
             tappedAngle = Math.Round(tappedAngle / 2.5) * 2.5;
+            if (tappedAngle == 360)
+                tappedAngle = 0;
 
             int hour= Convert.ToInt32(Math.Floor(tappedAngle / 30)) ;
             int minute = Convert.ToInt32((tappedAngle - Math.Floor(tappedAngle / 30) * 30) * 2);
+
+            DateTime time = new DateTime(DateTime.Now.Year,DateTime.Now.Month,DateTime.Now.Day,hour,minute,0);
+
             if (DateTime.Now.Hour < 12)
             {
                 //AM
-                if (hour < DateTime.Now.Hour || (hour == DateTime.Now.Hour && minute < DateTime.Now.Minute)) 
-                    hour += 12;
+                if (time < DateTime.Now)
+                    time = time.AddHours(12);
             }
             else
             {
                 //PM
-                if (hour + 12 < DateTime.Now.Hour || (hour + 12 == DateTime.Now.Hour && minute < DateTime.Now.Minute))
-                    hour -= 12;
+                if (time < DateTime.Now)
+                    time = time.AddHours(12);
             }
-            
-            updateAlarm(new DateTime(1, 1, 1, hour, minute, 0));
+
+            updateAlarm(time);
             //Convert.ToInt32(Math.Floor(tappedAngle / 30)) + (isPm ? 12 :0)
 
             
@@ -127,16 +133,17 @@ namespace SleepFixer
         {
             if (time != null)
             {
-                alarmTime.Value = time;
+                alarmTimePicker.Value = time;
                 ((CompositeTransform)alarmHand.RenderTransform).Rotation = ((DateTime)time).Hour * 30 + ((DateTime)time).Minute / 2 - 90;
+                alarmTime = (DateTime)time;
             }
            
         }
 
         private void setAlarm_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("/AlarmPage.xaml",
-                UriKind.Relative));
+
+            this.NavigationService.Navigate(new Uri("/AlarmPage.xaml?alarm=" + alarmTime.Ticks, UriKind.Relative));
         }
 
 
