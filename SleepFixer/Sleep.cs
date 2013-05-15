@@ -6,7 +6,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace XMLTest
+namespace SleepFixer
 {
     [XmlType("Sleep")]
     public class Sleep

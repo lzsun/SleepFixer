@@ -14,15 +14,25 @@ using Microsoft.Xna.Framework;
 using System.Windows.Media;
 using System.Windows.Threading;
 using Microsoft.Phone.Scheduler;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Devices;
+using System.Windows.Media.Imaging;
 
 
 namespace SleepFixer
 {
     public partial class AlarmPage : PhoneApplicationPage
     {
-
+        private int snoozeTime = 6;
+        
         private DateTime alarmTime;
+        private TimeSpan sleepTime;
+        private TimeSpan wakeupTime;
         public static Alarm alarm;
+
+        private int state;
+
+        private SoundEffectInstance alarmSound;
 
 
         Motion motion;
@@ -39,9 +49,12 @@ namespace SleepFixer
 
             alarmTimeText.Text = alarmTime.ToString("hh:mmtt");
 
+            alarmSound = AlarmSound.Alarm.CreateInstance();
+            alarmSound.IsLooped = true;
+
             timer.Tick += new EventHandler(timer_Tick);
             timer.Interval = new TimeSpan(0, 0, 1);
-            timer.Start();
+            //timer.Start();
 
         }
 
@@ -54,12 +67,35 @@ namespace SleepFixer
         void timer_Tick(object sender, EventArgs e)
         {
 
+            
             //Calculate the time, get the time
-            TimeSpan remain = alarmTime - DateTime.Now;
 
+
+            if (alarmTime > DateTime.Now)
+            {
+                TimeSpan remain = alarmTime - DateTime.Now;
+                remainText.Text = remain.ToString(@"hh\:mm\:ss");
+            }
+            else
+                startAlarm();
             //Txb_timeremain.Text = string.Format("{0}:{1}:{2}",alarm.Hour-dt.Hour>0?alarm.Hour:dt.Hour,alarm.Minute-dt.Minute>0?alarm.Minute:dt.Minute,alarm.Second-dt.Second>0?alarm.Second:dt.Second);
             //Txb_timeremain.Text = string.Format("{0}:{1}:{2}", remain.Hours, remain.Minutes, remain.Seconds);
-            remainText.Text = remain.ToString(@"hh\:mm\:ss");
+            
+        }
+
+        private void startAlarm()
+        {
+            state = 1;
+            VibrateController.Default.Start(TimeSpan.FromSeconds(.5));
+            alarmSound.Play();
+            //Bold Remain Time
+            remainText.Foreground = new SolidColorBrush(Colors.Red);
+            if (remainText.FontWeight != FontWeights.Bold)
+                remainText.FontWeight = FontWeights.Bold;
+            else
+                remainText.FontWeight = FontWeights.Normal;
+
+            backButton.Content = "Stop Alarm";
         }
 
 
@@ -68,8 +104,13 @@ namespace SleepFixer
         {
             base.OnNavigatedTo(e);
             //Start Alarm
+            state = 0;
             alarmTime = new DateTime(Convert.ToInt64(NavigationContext.QueryString["alarm"]));
+            sleepTime = DateTime.Now.TimeOfDay;
+            timer.Start();
             alarmTimeText.Text = alarmTime.ToString("hh:mmtt");
+
+
 
             AlarmPage.alarm = new Alarm("alarm");
             AlarmPage.alarm.BeginTime = alarmTime;
@@ -156,7 +197,7 @@ namespace SleepFixer
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Stop(object sender, RoutedEventArgs e)
+        private void Stop_Click(object sender, RoutedEventArgs e)
         {
             //timer.Stop();
             NavigationService.Navigate(new Uri("blabla.xaml", UriKind.Relative));
@@ -164,8 +205,47 @@ namespace SleepFixer
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
+            timer.Stop();
+            if(state == 0)
+                NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+            if(state == 1)
+            {
+                alarmSound.Stop();
+                wakeupTime = DateTime.Now.TimeOfDay;
+                moodPopup.IsOpen = true;
+            }
+            else if (state == 2)
+            {
+                wakeupTime = DateTime.Now.TimeOfDay;
+            }
+
+        }
+        private void moodBack_Click(object sender, RoutedEventArgs e)
+        {   
+            MessageBox.Show("Sleep: " + sleepTime.ToString(@"hh\:mm") + " Wakeup: " + wakeupTime.ToString(@"hh\:mm")+" Mood: "+Convert.ToInt32(moodSlider.Value));
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
+
+        private void Record_Click(object sender, RoutedEventArgs e)
+        {
+            if (state == 0)
+            {
+                sleepTime = DateTime.Now.TimeOfDay;
+                MessageBox.Show("Sleep Time:" + sleepTime.ToString());
+            }
+            else if (state == 1)
+            {
+                state = 2;
+                alarmTime = DateTime.Now.AddSeconds(snoozeTime);
+                alarmSound.Stop();
+                timeleftText.Text = "Snoozing: ";
+                //remainText.Foreground = new SolidColorBrush(Colors.White);
+                remainText.FontWeight = FontWeights.Normal;
+                //MessageBox.Show("Snooze");
+            }
+        }
+
+
 
 
 

@@ -23,12 +23,14 @@ namespace SleepFixer
         public MainPage()
         {
             InitializeComponent();
+            AlarmSound.Initialize();
+
 
             PhoneApplicationService phoneAppService = PhoneApplicationService.Current;
             phoneAppService.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             
             //Test Data
-            updateAlarm(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 8, 0, 0));
+            updateAlarm(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute+1, 0));
 
             //Load Time
             DispatcherTimer timer = new DispatcherTimer();
@@ -87,6 +89,7 @@ namespace SleepFixer
             else
             {
                 //PM
+                time = time.AddHours(12);
                 if (time < DateTime.Now)
                     time = time.AddHours(12);
             }
@@ -126,7 +129,10 @@ namespace SleepFixer
 
         private void timePicker_ValueChanged(object sender, DateTimeValueChangedEventArgs e)
         {
-            updateAlarm(e.NewDateTime);
+            if (e.NewDateTime < DateTime.Now)
+                updateAlarm(((DateTime)e.NewDateTime).AddHours(24));
+            else
+                updateAlarm(e.NewDateTime);
         }
 
         private void updateAlarm(DateTime ?time)
@@ -144,6 +150,12 @@ namespace SleepFixer
         {
 
             this.NavigationService.Navigate(new Uri("/AlarmPage.xaml?alarm=" + alarmTime.Ticks, UriKind.Relative));
+        }
+
+
+        private void History_Click(object sender, EventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("/HistoryPage.xaml", UriKind.Relative));
         }
 
 

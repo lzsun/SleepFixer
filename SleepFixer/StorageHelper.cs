@@ -6,7 +6,7 @@ using System.IO;
 using System.IO.IsolatedStorage;
 using System.Xml.Serialization;
 
-namespace XMLTest
+namespace SleepFixer
 {
     public static class StorageHelper
     {

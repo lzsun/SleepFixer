@@ -8,7 +8,7 @@ using System.Xml.Serialization;
 
 
 
-namespace XMLTest
+namespace SleepFixer
 {
     /// <summary>
     /// Using XML serization

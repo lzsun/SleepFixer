@@ -92,15 +92,10 @@
 
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBar.MenuItems>
-                <shell:ApplicationBarMenuItem x:Name="alarmButton"                                            
-                                            Text="Set Alarm"
-                                            />
-                <shell:ApplicationBarIconButton x:Name="settingsButton"
-                                            Text="Settings"
-                                            />
-            </shell:ApplicationBar.MenuItems>
-
+                <shell:ApplicationBarIconButton IconUri="/Images/feature.alarm.png" Text="Alarm"/>
+                <shell:ApplicationBarIconButton IconUri="/Images/feature.calendar.png" Text="History"  Click="History_Click"/>
+                <shell:ApplicationBarIconButton IconUri="/Images/check.png" Text="Stats"/>
+                <shell:ApplicationBarIconButton IconUri="/Images/feature.settings.png" Text="Settings"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>

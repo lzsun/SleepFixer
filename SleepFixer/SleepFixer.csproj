@@ -93,8 +93,12 @@
     <Compile Include="AlarmPage.xaml.cs">
       <DependentUpon>AlarmPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AlarmSound.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="HistoryPage.xaml.cs">
+      <DependentUpon>HistoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -106,6 +110,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Sleep.cs" />
+    <Compile Include="SleepFixer.cs" />
+    <Compile Include="StorageHelper.cs" />
     <Compile Include="ViewModels\ItemViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
   </ItemGroup>
@@ -115,6 +122,9 @@
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
     <Page Include="AlarmPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="HistoryPage.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Include="MainPage.xaml">
@@ -153,12 +163,17 @@
     <Content Include="Assets\Tiles\IconicTileSmall.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Audio\alarm.wav" />
     <Content Include="Images\alarmHand.png" />
+    <Content Include="Images\check.png" />
     <Content Include="Images\clock01.png" />
     <Content Include="Images\clock01_hour.png" />
     <Content Include="Images\clock01_min.png" />
     <Content Include="Images\clock01_sec.png" />
     <Content Include="Images\clock_face.jpg" />
+    <Content Include="Images\feature.alarm.png" />
+    <Content Include="Images\feature.calendar.png" />
+    <Content Include="Images\feature.settings.png" />
     <Content Include="Images\hourHand.jpg" />
     <Content Include="Images\minuteHand.png" />
     <Content Include="Images\secondHand.png" />

@@ -31,24 +31,41 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Text="Time left: " FontSize="40" Grid.Column="0"/>
-                <TextBlock Name="remainText" Text="7:50:50" Grid.Column="1" FontSize="40" Height="53" Margin="0,0,12,0" TextAlignment="Center"/>
+                <TextBlock x:Name="timeleftText" Text="Time left: " FontSize="40" Grid.Column="0"/>
+                <TextBlock x:Name="remainText" Text="7:50:50" Grid.Column="1" FontSize="40" Height="53" Margin="0,0,12,0" TextAlignment="Center"/>
             </Grid>
             
         </StackPanel>
         <StackPanel  Grid.Row="2">
-            <TextBlock Text="Please flip your phone when you are ready to sleep" HorizontalAlignment="Center" Margin="5"/>
-            <Image Source="/Images/sleep.png" HorizontalAlignment="Center" Width="400" />
+            <TextBlock Text="Please flip your phone when you are ready to sleep.&#13;Or click the image to manually record your sleep time." HorizontalAlignment="Center" TextAlignment="Center" FontSize="18" Margin="5"/>
+            <Button x:Name="img" HorizontalAlignment="Center" Width="400" Click="Record_Click">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="/Images/sleep.png"/>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </StackPanel>
-        
+
+        <Popup x:Name="moodPopup" IsOpen="False" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Center" Margin="90,0,0,0">
+            <Border Background="Gray">
+                <StackPanel>
+                    <TextBlock Text="How do you feel this morning?" TextAlignment="Center"/>
+                    <Slider x:Name="moodSlider" Width="300" Minimum="1" Maximum="5"/>
+                    <Button Content="Back" Click="moodBack_Click" Width="100"/>
+                </StackPanel>
+            </Border>
+            
+        </Popup>
+
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Margin="0,20,0,0" Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Back" Grid.ColumnSpan="2" Click="Back_Click"/>
-            <Button  Click="Stop" Content="Stop" Margin="20,0,20,0" Grid.Column="0"  Visibility="Collapsed"/>
+            <Button x:Name="backButton" Content="Back" Grid.ColumnSpan="2" Click="Back_Click"/>
+            <Button x:Name="StopButton"  Click="Stop_Click" Content="Stop" Margin="20,0,20,0" Grid.Column="0"  Visibility="Collapsed"/>
 
             <Button Click="Snooze" Content="Snooze" Margin="20,0,20,0" Grid.Column="1" Visibility="Collapsed"/>
         </Grid>

@@ -7,21 +7,21 @@ using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
-using XMLTest.Resources;
+using SleepFixer.Resources;
 using System.Text;
 
 
 
-namespace XMLTest
+namespace SleepFixer
 {
-    public partial class MainPage : PhoneApplicationPage
+    public partial class HistoryPage : PhoneApplicationPage
     {
         /// <summary>
         /// note: have to instance sleep before use sleepfixer
         /// </summary>
         public SleepFixer sf = new SleepFixer{Sleep=new List<Sleep>()};
         // Constructor
-        public MainPage()
+        public HistoryPage()
         {
             InitializeComponent();
             sf.Sleep.AddRange(Generator());
@@ -78,8 +78,8 @@ namespace XMLTest
             //AddLog(List[59]);
             //string s = StorageHelper.GetAbsolutePath("SleepLog.xml");
            List<Sleep> temp = StorageHelper.LoadJogs();
+           listSleep.ItemsSource = temp;
+           
         }
-        
-       
     }
 }
