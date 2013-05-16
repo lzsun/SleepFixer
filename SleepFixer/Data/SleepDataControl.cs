@@ -8,13 +8,14 @@ using System.Xml.Serialization;
 
 namespace SleepFixer
 {
-    public static class StorageHelper
+    public static class SleepDataControl
     {
         private const string FILE_NAME = "SleepLog.xml";
+
+        public static SleepDataRoot jogs = new SleepDataRoot();
        
-        public static List<Sleep> LoadJogs()
+        public static void LoadJogs()
         {
-            List<Sleep> jogs = new List<Sleep>();
             TextReader reader = null;
             try
             {
@@ -27,8 +28,9 @@ namespace SleepFixer
                 //用不用xmlhelper没什么区别
                 //XmlSerializer xs = new XmlSerializer(typeof(List<Sleep>));
                 //jogs.AddRange(((List<Sleep>)xs.Deserialize(reader)));
-                XmlSerializer xs = new XmlSerializer(typeof(SleepFixer));
-                jogs.AddRange(((SleepFixer)xs.Deserialize(reader)).Sleep);
+                XmlSerializer xs = new XmlSerializer(typeof(SleepDataRoot));
+                jogs = new SleepDataRoot();
+                jogs.Sleep.AddRange(((SleepDataRoot)xs.Deserialize(reader)).Sleep);
                 
                 reader.Close();
             }
@@ -41,12 +43,11 @@ namespace SleepFixer
                 if (reader != null)
                     reader.Dispose();
             }
-            return jogs;
         }
         
 
         //List<Sleep> jogs
-        public static void SaveJogs(SleepFixer sf)
+        public static void SaveJogs()
         {
             TextWriter writer = null;
             try
@@ -55,9 +56,9 @@ namespace SleepFixer
                 IsolatedStorageFileStream file = isoStorage.OpenFile(FILE_NAME, FileMode.Create);
                 writer = new StreamWriter(file);
                 //XmlSerializer xs = new XmlSerializer(typeof(List<Sleep>));
-                XmlSerializer xs = new XmlSerializer(typeof(SleepFixer));
+                XmlSerializer xs = new XmlSerializer(typeof(SleepDataRoot));
                 //xs.Serialize(writer, jogs);
-                xs.Serialize(writer, sf);
+                xs.Serialize(writer, jogs);
                 writer.Close();
                
                 
@@ -73,27 +74,43 @@ namespace SleepFixer
             
         }
 
+        public static void Add(SleepData data)
+        {
+            jogs.Sleep.Add(data);
+            SaveJogs();
+        }
+
+        //Generate Random Data
+        public static void Random()
+        {
+            DateTime wake = new DateTime(2013, 3, 10, 6, 0, 0);
+            DateTime sleep = new DateTime(2013, 3, 10, 22, 0, 0);
+            Random r = new Random();
+            jogs = new SleepDataRoot();
+            for (int i = 0; i < 60; i++)
+            {
+                SleepData s = new SleepData(
+                    wake.AddDays(i),         
+                    sleep.AddMinutes(r.Next(0, 240)).TimeOfDay,
+                    wake.AddMinutes(r.Next(0, 240)).TimeOfDay,
+                    r.Next(1,5),
+                    false);
+                jogs.Sleep.Add(s);
+            }
+            SaveJogs();
+        }
+
+        public static Boolean checkExist(DateTime date)
+        {
+            foreach (SleepData data in jogs.Sleep)
+            {
+                if(data.Date.ToString("d") == date.ToString("d"))
+                    return true;
+            }
+            return false;
+        }
 
 
-        //public static string GetAbsolutePath(string filename)
-        //{
-        //    IsolatedStorageFile isoStore = IsolatedStorageFile.GetUserStoreForApplication();
-
-        //    string absoulutePath = null;
-
-        //    if (isoStore.FileExists(filename))
-        //    {
-        //        IsolatedStorageFileStream output = new IsolatedStorageFileStream(filename, FileMode.Open, isoStore);
-        //        absoulutePath = output.Name;
-
-        //        output.Close();
-        //        output = null;
-        //    }
-
-        //    return absoulutePath;
-        //}
-        //public StorageHelper()
-        //{
-        //}
+       
     }
 }

@@ -8,6 +8,12 @@
     <!--Application Resources-->
     <Application.Resources>
         <local:LocalizedStrings xmlns:local="clr-namespace:SleepFixer" x:Key="LocalizedStrings"/>
+        <shell:ApplicationBar x:Key="AppBar" IsVisible="True" IsMenuEnabled="True">
+                <shell:ApplicationBarIconButton IconUri="/Images/appbar.alarm.png" Text="Alarm" Click="Alarm_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.calendar.png" Text="History"  Click="History_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.chart.png" Text="Stats" Click="Stats_Click"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar.settings.png" Text="Settings" Click="Settings_Click"/>
+        </shell:ApplicationBar>
     </Application.Resources>
 
     <Application.ApplicationLifetimeObjects>

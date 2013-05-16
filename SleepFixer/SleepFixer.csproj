@@ -97,6 +97,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\HistoryData.cs" />
+    <Compile Include="Data\StoredItem.cs" />
     <Compile Include="HistoryPage.xaml.cs">
       <DependentUpon>HistoryPage.xaml</DependentUpon>
     </Compile>
@@ -110,11 +112,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AppResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Sleep.cs" />
-    <Compile Include="SleepFixer.cs" />
-    <Compile Include="StorageHelper.cs" />
-    <Compile Include="ViewModels\ItemViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Data\SleepData.cs" />
+    <Compile Include="Data\SleepDataRoot.cs" />
+    <Compile Include="Data\SleepDataControl.cs" />
+    <Compile Include="SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -131,10 +134,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <DesignData Include="SampleData\MainViewModelSampleData.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="SettingsPage.xaml">
       <SubType>Designer</SubType>
-    </DesignData>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="Images\Thumbs.db" />
@@ -171,14 +173,20 @@
     <Content Include="Images\clock01_min.png" />
     <Content Include="Images\clock01_sec.png" />
     <Content Include="Images\clock_face.jpg" />
-    <Content Include="Images\feature.alarm.png" />
-    <Content Include="Images\feature.calendar.png" />
-    <Content Include="Images\feature.settings.png" />
     <Content Include="Images\hourHand.jpg" />
     <Content Include="Images\minuteHand.png" />
     <Content Include="Images\secondHand.png" />
     <Content Include="Images\sleep.png" />
     <Content Include="Images\thCAIHUUYW.jpg" />
+    <Content Include="Images\appbar.alarm.png" />
+    <Content Include="Images\appbar.calendar.png" />
+    <Content Include="Images\appbar.chart.png" />
+    <Content Include="Images\appbar.settings.png" />
+    <Content Include="Images\mood.1.png" />
+    <Content Include="Images\mood.2.png" />
+    <Content Include="Images\mood.3.png" />
+    <Content Include="Images\mood.4.png" />
+    <Content Include="Images\mood.5.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
   </ItemGroup>
@@ -192,11 +200,13 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Phone.Controls, Version=8.0.0.0, Culture=neutral, PublicKeyToken=24eec0d8c86cda1e, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>Dependencies\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2013.1.418.3040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Primitives, Version=2013.1.418.3040, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

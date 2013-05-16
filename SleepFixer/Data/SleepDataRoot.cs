@@ -18,12 +18,12 @@ namespace SleepFixer
     /// </summary>
 
     [XmlType("SleepFixer")]
-    public class SleepFixer
+    public class SleepDataRoot
     {
         
         [XmlElement]
         //[XmlArrayItem("Sleep")]
-        public List<Sleep> Sleep{get;set;}
+        public List<SleepData> Sleep = new List<SleepData>();
     }
 
     

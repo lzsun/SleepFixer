@@ -6,12 +6,14 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input" 
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    ApplicationBar="{StaticResource AppBar}">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -19,6 +21,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- LOCALIZATION NOTE:
@@ -41,47 +44,37 @@
          -->
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+        <StackPanel Orientation="Vertical" Grid.Row="0">
             <TextBlock Text="Sleep Fixer" Style="{StaticResource PhoneTextNormalStyle}" />
+            <TextBlock Text="history" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
         </StackPanel>
 
+        <!--<ListBox x:Name="resultList" Grid.Row="1" Margin="50,0,50,0"/>-->
+
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <Button Name="btnTest" Margin="30" Click="XMLTest">XML Test</Button>
+        <telerikInput:RadCalendar x:Name="radCalendar" Grid.Row="1" Height="540" Margin="10" MonthInfoDisplayMode="Small" >
+            <telerikInput:RadCalendar.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding DetailText}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,2,0" TextAlignment="Right" FontSize="14" Foreground="LightBlue" />
+                        <TextBlock Text="{Binding Text}" FontWeight="Bold" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="2,0,0,0" HorizontalAlignment="Left" />
+                    </Grid>
+                </DataTemplate>
+            </telerikInput:RadCalendar.ItemTemplate>
+
+        </telerikInput:RadCalendar>
+
+
+            <Grid  x:Name="ContentPanel" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Click="Random_Click" Content="Random" VerticalAlignment="Center" Grid.Column="0" FontSize="14"/>
+            <Button Content="Display" Click="Display_Click" VerticalAlignment="Center" Grid.Column="1" FontSize="14"/>
         </Grid>
 
-        <Grid Margin="50,140"  VerticalAlignment="Center" HorizontalAlignment="Left">
-
-            <!--通过模板设置 ListBox 的每一项的布局和数据-->
-            <ListBox ScrollViewer.HorizontalScrollBarVisibility="Visible" Name="listSleep" ItemsSource="{Binding ItemsSource, ElementName=listBoxWithBinding}" SelectionMode="Multiple" Width="300" Height="362" Margin="5,5,-100,-90" HorizontalAlignment="Left" VerticalAlignment="Top">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Date }" />
-                            <TextBlock Text="{Binding SleeptimeString }" Margin="5 0 0 0" />
-                            <TextBlock Text="{Binding WakeupTimeString }" Margin="5 0 0 0" />           
-                            <TextBlock Text="{Binding Mood }" Margin="5 0 0 0" />
-                            <TextBlock Text="{Binding IsNap }" Margin="5 0 0 0" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <!--
-                            VirtualizingStackPanel - 虚拟化的 StackPanel（即仅生成需要显示的 UI 元素。当绑定了大量数据，而某时仅显示其中一小部分的时候，使用此控件则可大幅提高呈现效率）
-                                Orientation - 数据的排列方式（垂直排列或水平排列，也就是说 ListBox 也可以水平排列）
-                                VirtualizationMode - 虚拟化的模式
-                                    Recycling - item 的容器会被重用，默认值
-                                    Standard - 每个 item 都有自己独立的容器
-                        
-                            注：ListBox 默认已经使用了 VirtualizingStackPanel，但是其对于变高的 DataTemplate 来说支持得不好
-                        -->
-                        <VirtualizingStackPanel Orientation="Vertical" VirtualizingStackPanel.VirtualizationMode="Recycling" />
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-            </ListBox>
-
-        </Grid>
+        
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to
             account for the System Tray. Set this to 0 (or remove the margin altogether)

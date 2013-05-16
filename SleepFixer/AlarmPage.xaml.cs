@@ -30,6 +30,8 @@ namespace SleepFixer
         private TimeSpan wakeupTime;
         public static Alarm alarm;
 
+
+        private bool isSleepSet = false;
         private int state;
 
         private SoundEffectInstance alarmSound;
@@ -86,7 +88,8 @@ namespace SleepFixer
         private void startAlarm()
         {
             state = 1;
-            VibrateController.Default.Start(TimeSpan.FromSeconds(.5));
+            if(SettingsPage.enableVibration.Value)
+                VibrateController.Default.Start(TimeSpan.FromSeconds(.5));
             alarmSound.Play();
             //Bold Remain Time
             remainText.Foreground = new SolidColorBrush(Colors.Red);
@@ -98,6 +101,13 @@ namespace SleepFixer
             backButton.Content = "Stop Alarm";
         }
 
+        private void setSleepTime()
+        {
+            isSleepSet = true;
+            sleepTime = DateTime.Now.TimeOfDay;
+            instructionText.Text = "Sleep Time Recorded: " + DateTime.Now.ToString("hh:mmtt")+ System.Environment.NewLine;
+        }
+
 
         // Load data for the ViewModel Items
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -105,10 +115,14 @@ namespace SleepFixer
             base.OnNavigatedTo(e);
             //Start Alarm
             state = 0;
+            isSleepSet = false;
             alarmTime = new DateTime(Convert.ToInt64(NavigationContext.QueryString["alarm"]));
             sleepTime = DateTime.Now.TimeOfDay;
             timer.Start();
+
+            remainText.Text = (alarmTime - DateTime.Now).ToString(@"hh\:mm\:ss");
             alarmTimeText.Text = alarmTime.ToString("hh:mmtt");
+
 
 
 
@@ -167,7 +181,13 @@ namespace SleepFixer
             // Check to see if the Motion data is valid.
             if (motion.IsDataValid)
             {
-
+                if (e.Gravity.Z >= 0.9)
+                {
+                    if (isSleepSet == false)
+                    {
+                        setSleepTime();
+                    }         
+                }
             }
         }
 
@@ -216,13 +236,23 @@ namespace SleepFixer
             }
             else if (state == 2)
             {
+                alarmSound.Stop();
                 wakeupTime = DateTime.Now.TimeOfDay;
+                moodPopup.IsOpen = true;
             }
 
         }
         private void moodBack_Click(object sender, RoutedEventArgs e)
         {   
-            MessageBox.Show("Sleep: " + sleepTime.ToString(@"hh\:mm") + " Wakeup: " + wakeupTime.ToString(@"hh\:mm")+" Mood: "+Convert.ToInt32(moodSlider.Value));
+            //MessageBox.Show("Sleep: " + sleepTime.ToString(@"hh\:mm") + " Wakeup: " + wakeupTime.ToString(@"hh\:mm")+" Mood: "+Convert.ToInt32(moodSlider.Value));
+            if (SleepDataControl.checkExist(DateTime.Now) == true)
+            {
+                SleepDataControl.Add(new SleepData(DateTime.Now, sleepTime, wakeupTime, Convert.ToInt32(moodSlider.Value), true));
+            }
+            else
+            {
+                SleepDataControl.Add(new SleepData(DateTime.Now, sleepTime, wakeupTime, Convert.ToInt32(moodSlider.Value), false));
+            }
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 
@@ -230,8 +260,13 @@ namespace SleepFixer
         {
             if (state == 0)
             {
-                sleepTime = DateTime.Now.TimeOfDay;
-                MessageBox.Show("Sleep Time:" + sleepTime.ToString());
+                if (isSleepSet == false)
+                {
+                    setSleepTime();
+                }
+                
+                
+                //MessageBox.Show("Sleep Time:" + sleepTime.ToString());
             }
             else if (state == 1)
             {
@@ -243,6 +278,12 @@ namespace SleepFixer
                 remainText.FontWeight = FontWeights.Normal;
                 //MessageBox.Show("Snooze");
             }
+        }
+
+        private void moodSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if(moodSlider != null)
+                moodSlider.Value = Math.Round(moodSlider.Value);
         }
 
 

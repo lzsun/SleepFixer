@@ -37,7 +37,7 @@
             
         </StackPanel>
         <StackPanel  Grid.Row="2">
-            <TextBlock Text="Please flip your phone when you are ready to sleep.&#13;Or click the image to manually record your sleep time." HorizontalAlignment="Center" TextAlignment="Center" FontSize="18" Margin="5"/>
+            <TextBlock x:Name="instructionText" Text="Please flip your phone when you are ready to sleep.&#13;Or click the image to manually record your sleep time." HorizontalAlignment="Center" TextAlignment="Center" FontSize="18" Margin="5"/>
             <Button x:Name="img" HorizontalAlignment="Center" Width="400" Click="Record_Click">
                 <Button.Template>
                     <ControlTemplate>
@@ -47,11 +47,18 @@
             </Button>
         </StackPanel>
 
-        <Popup x:Name="moodPopup" IsOpen="False" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Center" Margin="90,0,0,0">
-            <Border Background="Gray">
+        <Popup x:Name="moodPopup" IsOpen="False" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Center" Margin="90,-100,0,0">
+            <Border Background="CornflowerBlue">
                 <StackPanel>
                     <TextBlock Text="How do you feel this morning?" TextAlignment="Center"/>
-                    <Slider x:Name="moodSlider" Width="300" Minimum="1" Maximum="5"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Images/mood.1.png" Margin="0,0,15,0"/>
+                        <Image Source="/Images/mood.2.png" Margin="0,0,15,0"/>
+                        <Image Source="/Images/mood.3.png" Margin="0,0,15,0"/>
+                        <Image Source="/Images/mood.4.png" Margin="0,0,15,0"/>
+                        <Image Source="/Images/mood.5.png"/>
+                    </StackPanel>
+                    <Slider x:Name="moodSlider" Minimum="1" Maximum="5" Value="5" ValueChanged="moodSlider_ValueChanged"/>
                     <Button Content="Back" Click="moodBack_Click" Width="100"/>
                 </StackPanel>
             </Border>

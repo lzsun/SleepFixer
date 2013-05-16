@@ -9,7 +9,7 @@
     To see all Code Samples for Windows Phone, visit http://go.microsoft.com/fwlink/?LinkID=219604
 -->
 <phone:PhoneApplicationPage
-    x:Class="AlarmClockWithVoice.Settings"
+    x:Class="SleepFixer.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -22,7 +22,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    ApplicationBar="{StaticResource AppBar}">
 
     <!--Style="{StaticResource TransitionPageStyle}"-->
 
@@ -34,8 +35,9 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="SETTINGS" Style="{StaticResource PhoneTextNormalStyle}"/>
+        <StackPanel Orientation="Vertical" Grid.Row="0">
+            <TextBlock Text="Sleep Fixer" Style="{StaticResource PhoneTextNormalStyle}" />
+            <TextBlock Text="settings" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
         </StackPanel>
 
         <ScrollViewer Grid.Row="1">
@@ -62,20 +64,20 @@
                                           Grid.Row="1" IsChecked="True" FontSize="24"
                                           Unchecked="ToggleSwitch_UnChecked"
                                           Checked="ToggleSwitch_Checked"/>
-                    <toolkit:ToggleSwitch x:Name="alarmstopstyleToggleSwitch" Content="Hold to stop: ON"
+                    <toolkit:ToggleSwitch x:Name="holdToggleSwitch" Content="Hold to stop: ON"
                                           Grid.Row="2" IsChecked="True" FontSize="24"
-                                          Unchecked="Holder"
-                                          Checked="Simple"/>
+                                          Unchecked="Hold_Uncheck"
+                                          Checked="Hold_Check"/>
                     <!--<toolkit:ToggleSwitch x:Name="snoozetimeToggleSwitch" Content="Modify snooze time: ON"
                                           Grid.Row="3" IsChecked="True" FontSize="24"
                                           Unchecked="Displayslider"
                                           Checked="Hideslider"/>-->
                     <StackPanel x:Name="snooze" Grid.Row="4" Orientation="Vertical">
                         <TextBlock x:Name="snoozetext" HorizontalAlignment="Stretch" Margin="0,0,10,0" Height="53" >
-                    		<Run Text="Set your snooze time as: 1 min" />
+                    		<Run Text="Snooze Time: 1 mins" />
                         </TextBlock>
                         
-                        <Slider x:Name="snoozeslider" Minimum="1" Maximum="15" Width="400" ValueChanged="Snooze"/>
+                        <Slider x:Name="snoozeslider" Minimum="1" Maximum="15" Width="400" ValueChanged="Snooze_ValueChanged"/>
                     </StackPanel>
                     <!--<Grid Grid.Row="4">        
                         <Grid.RowDefinitions>

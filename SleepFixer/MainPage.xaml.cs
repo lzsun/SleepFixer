@@ -23,19 +23,28 @@ namespace SleepFixer
         public MainPage()
         {
             InitializeComponent();
-            AlarmSound.Initialize();
 
+            InitializeModel();
+
+           
+            
 
             PhoneApplicationService phoneAppService = PhoneApplicationService.Current;
             phoneAppService.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             
             //Test Data
-            updateAlarm(new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, DateTime.Now.Hour, DateTime.Now.Minute+1, 0));
+            updateAlarm(DateTime.Now.AddMinutes(1).AddSeconds(-DateTime.Now.Second));
 
             //Load Time
             DispatcherTimer timer = new DispatcherTimer();
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
+        }
+
+        private void InitializeModel()
+        {
+            AlarmSound.Initialize();
+            SleepDataControl.LoadJogs();
         }
 
 
@@ -149,14 +158,12 @@ namespace SleepFixer
         private void setAlarm_Click(object sender, RoutedEventArgs e)
         {
 
+            if (alarmTime <= DateTime.Now)
+                alarmTime = alarmTime.AddHours(24);
             this.NavigationService.Navigate(new Uri("/AlarmPage.xaml?alarm=" + alarmTime.Ticks, UriKind.Relative));
+            
         }
 
-
-        private void History_Click(object sender, EventArgs e)
-        {
-            this.NavigationService.Navigate(new Uri("/HistoryPage.xaml", UriKind.Relative));
-        }
 
 
 
