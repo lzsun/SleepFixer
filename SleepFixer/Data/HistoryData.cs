@@ -23,14 +23,14 @@ namespace SleepFixer
             {
                 if (data.IsNap == false)
                 {
-                    TimeSpan sleepTime = data.WakeupTime >= data.SleepTime ? data.WakeupTime - data.SleepTime : (data.WakeupTime - data.SleepTime).Add(new TimeSpan(24, 0, 0));
+                    TimeSpan sleepHours = data.WakeupTime >= data.SleepTime ? data.WakeupTime - data.SleepTime : (data.WakeupTime - data.SleepTime).Add(new TimeSpan(24, 0, 0));
                     this.AllAppointments.Add(new SampleAppointment()
                     {
                         StartDate = data.Date,
                         EndDate = data.Date.AddHours(1),
-                        Subject = "S: " + data.SleeptimeString
-                            + System.Environment.NewLine + "W: " + data.WakeupTimeString
-                            + System.Environment.NewLine + sleepTime.ToString(@"h\hmm\m")
+                        Subject = "S: " + (SettingsPage.is24Hr.Value ? data.SleeptimeString :DateTime.Today.Add(data.SleepTime).ToString("hh:mmt"))
+                            + System.Environment.NewLine + "W: " + (SettingsPage.is24Hr.Value ? data.WakeupTimeString : DateTime.Today.Add(data.WakeupTime).ToString("hh:mmt"))
+                            + System.Environment.NewLine + sleepHours.ToString(@"h\hmm\m")
                             + System.Environment.NewLine + "M: " + data.Mood.ToString()
                     });
                 }

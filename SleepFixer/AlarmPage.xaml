@@ -6,6 +6,8 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:telerikCore="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -36,18 +38,17 @@
             </Grid>
             
         </StackPanel>
-        <StackPanel  Grid.Row="2">
-            <TextBlock x:Name="instructionText" Text="Please flip your phone when you are ready to sleep.&#13;Or click the image to manually record your sleep time." HorizontalAlignment="Center" TextAlignment="Center" FontSize="18" Margin="5"/>
-            <Button x:Name="img" HorizontalAlignment="Center" Width="400" Click="Record_Click">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Image Source="/Images/sleep.png"/>
-                    </ControlTemplate>
-                </Button.Template>
+        <Grid  Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" x:Name="instructionText" Text="Please flip your phone when you are ready to sleep.&#13;Or click the image to manually record your sleep time." HorizontalAlignment="Center" TextAlignment="Center" FontSize="18" Margin="5"/>
+            <Button BorderThickness="0" Grid.Row="1" x:Name="img" HorizontalAlignment="Center" Height="320" Click="Image_Click" VerticalAlignment="Center">
+                <Image Source="/Images/alarm.goodnight.jpg"/>
             </Button>
-        </StackPanel>
-
-        <Popup x:Name="moodPopup" IsOpen="False" Grid.Row="0" Grid.RowSpan="4" VerticalAlignment="Center" Margin="90,-100,0,0">
+        </Grid>
+        <telerikPrimitives:RadModalWindow x:Name="window" Placement="CenterCenter">
             <Border Background="CornflowerBlue">
                 <StackPanel>
                     <TextBlock Text="How do you feel this morning?" TextAlignment="Center"/>
@@ -63,18 +64,24 @@
                 </StackPanel>
             </Border>
             
-        </Popup>
-
+            <telerikPrimitives:RadModalWindow.OpenAnimation>
+                <telerikCore:RadPlaneProjectionAnimation CenterY="0.5" CenterX="0" StartAngleX="-90" EndAngleX="0" Axes="X">
+                    <telerikCore:RadPlaneProjectionAnimation.Easing>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </telerikCore:RadPlaneProjectionAnimation.Easing>
+                </telerikCore:RadPlaneProjectionAnimation>
+            </telerikPrimitives:RadModalWindow.OpenAnimation>
+        </telerikPrimitives:RadModalWindow>
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Margin="0,20,0,0" Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="backButton" Content="Back" Grid.ColumnSpan="2" Click="Back_Click"/>
-            <Button x:Name="StopButton"  Click="Stop_Click" Content="Stop" Margin="20,0,20,0" Grid.Column="0"  Visibility="Collapsed"/>
+            <Button x:Name="backButton" Content="Back" Grid.ColumnSpan="2" Click="Back_Click" Hold="back_Hold"/>
+            <!--<Button x:Name="StopButton"  Click="Stop_Click" Content="Stop" Margin="20,0,20,0" Grid.Column="0"  Visibility="Collapsed"/>
 
-            <Button Click="Snooze" Content="Snooze" Margin="20,0,20,0" Grid.Column="1" Visibility="Collapsed"/>
+            <Button Click="Snooze" Content="Snooze" Margin="20,0,20,0" Grid.Column="1" Visibility="Collapsed"/>-->
         </Grid>
     </Grid>
 

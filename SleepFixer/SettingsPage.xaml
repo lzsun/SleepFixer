@@ -73,10 +73,7 @@
                                           Unchecked="Displayslider"
                                           Checked="Hideslider"/>-->
                     <StackPanel x:Name="snooze" Grid.Row="4" Orientation="Vertical">
-                        <TextBlock x:Name="snoozetext" HorizontalAlignment="Stretch" Margin="0,0,10,0" Height="53" >
-                    		<Run Text="Snooze Time: 1 mins" />
-                        </TextBlock>
-                        
+                        <TextBlock Text="Snooze Time: 1 mins" x:Name="snoozetext" Margin="10,20,0,0" FontSize="24"/>
                         <Slider x:Name="snoozeslider" Minimum="1" Maximum="15" Width="400" ValueChanged="Snooze_ValueChanged"/>
                     </StackPanel>
                     <!--<Grid Grid.Row="4">        

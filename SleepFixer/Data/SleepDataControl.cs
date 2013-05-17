@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 
 namespace SleepFixer
 {
+    
     public static class SleepDataControl
     {
         private const string FILE_NAME = "SleepLog.xml";

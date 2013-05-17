@@ -27,7 +27,7 @@ namespace SleepFixer
         public static readonly StoredItem<bool> is24Hr = new StoredItem<bool>("is24Hr", true);
         //public static readonly StoredItem<bool> snoozetime = new StoredItem<bool>("snoozetime", true);
         public static readonly StoredItem<bool> holdToStop = new StoredItem<bool>("holdToStop", true);
-        public static readonly StoredItem<int> snoozeTime = new StoredItem<int>("snoozeTime", 0);
+        public static readonly StoredItem<int> snoozeTime = new StoredItem<int>("snoozeTime", 5);
         public static readonly StoredItem<bool> enableVibration = new StoredItem<bool>("enableVibration", true);
         
         
@@ -94,7 +94,7 @@ namespace SleepFixer
             this.vibrationToggleSwitch.Content = SettingsPage.enableVibration.Value ?
                 "Enable Vibration: ON" : "Enable Vibration: OFF";
             this.holdToggleSwitch.Content = SettingsPage.holdToStop.Value ?
-                "Press for stop" : "Hold for stop";
+                "Alarm Stop Trigger: Hold " : "Alarm Stop Trigger: Press";
         }
 
 
@@ -118,13 +118,13 @@ namespace SleepFixer
         private void Hold_Uncheck(object sender, RoutedEventArgs e)
         {
             ToggleSwitch senderToggleSwitch = sender as ToggleSwitch;
-            senderToggleSwitch.Content = "Press for stop";
+            senderToggleSwitch.Content = "Alarm Stop Trigger: Press";
         }
 
         private void Hold_Check(object sender, RoutedEventArgs e)
         {
             ToggleSwitch senderToggleSwitch = sender as ToggleSwitch;
-            senderToggleSwitch.Content = "Hold for stop";
+            senderToggleSwitch.Content = "Alarm Stop Trigger: Hold";
         }
 
         private void Snooze_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)

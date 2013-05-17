@@ -23,7 +23,6 @@ namespace SleepFixer
 {
     public partial class AlarmPage : PhoneApplicationPage
     {
-        private int snoozeTime = 6;
         
         private DateTime alarmTime;
         private TimeSpan sleepTime;
@@ -49,7 +48,7 @@ namespace SleepFixer
 
             //alarmTime = new DateTime(2013, 5, 10, 9, 20, 3);
 
-            alarmTimeText.Text = alarmTime.ToString("hh:mmtt");
+            alarmTimeText.Text = SettingsPage.is24Hr.Value ? alarmTime.ToString("HH:mm") : alarmTime.ToString("hh:mmtt");
 
             alarmSound = AlarmSound.Alarm.CreateInstance();
             alarmSound.IsLooped = true;
@@ -88,6 +87,9 @@ namespace SleepFixer
         private void startAlarm()
         {
             state = 1;
+            //Change the image
+            (img.Content as Image).Source= new BitmapImage(new Uri("/Images/alarm.snooze.jpg",UriKind.Relative));
+
             if(SettingsPage.enableVibration.Value)
                 VibrateController.Default.Start(TimeSpan.FromSeconds(.5));
             alarmSound.Play();
@@ -98,7 +100,7 @@ namespace SleepFixer
             else
                 remainText.FontWeight = FontWeights.Normal;
 
-            backButton.Content = "Stop Alarm";
+            backButton.Content = SettingsPage.holdToStop.Value ? "Hold to Stop Alarm" : "Stop Alarm";
         }
 
         private void setSleepTime()
@@ -121,7 +123,7 @@ namespace SleepFixer
             timer.Start();
 
             remainText.Text = (alarmTime - DateTime.Now).ToString(@"hh\:mm\:ss");
-            alarmTimeText.Text = alarmTime.ToString("hh:mmtt");
+            alarmTimeText.Text = SettingsPage.is24Hr.Value ? alarmTime.ToString("HH:mm") : alarmTime.ToString("hh:mmtt");
 
 
 
@@ -192,7 +194,7 @@ namespace SleepFixer
         }
 
 
-        /// <summary>
+        /*/// <summary>
         /// Snooze function
         /// Also need to stop alarm,
         /// </summary>
@@ -221,25 +223,29 @@ namespace SleepFixer
         {
             //timer.Stop();
             NavigationService.Navigate(new Uri("blabla.xaml", UriKind.Relative));
-        }
+        }*/
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
             if(state == 0)
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
-            if(state == 1)
+            if (SettingsPage.holdToStop.Value == false)
             {
-                alarmSound.Stop();
-                wakeupTime = DateTime.Now.TimeOfDay;
-                moodPopup.IsOpen = true;
+                if (state == 1)
+                {
+                    alarmSound.Stop();
+                    wakeupTime = DateTime.Now.TimeOfDay;
+                    window.IsOpen = true;
+                }
+                else if (state == 2)
+                {
+                    alarmSound.Stop();
+                    wakeupTime = DateTime.Now.TimeOfDay;
+                    window.IsOpen = true;
+                }
             }
-            else if (state == 2)
-            {
-                alarmSound.Stop();
-                wakeupTime = DateTime.Now.TimeOfDay;
-                moodPopup.IsOpen = true;
-            }
+            
 
         }
         private void moodBack_Click(object sender, RoutedEventArgs e)
@@ -247,16 +253,16 @@ namespace SleepFixer
             //MessageBox.Show("Sleep: " + sleepTime.ToString(@"hh\:mm") + " Wakeup: " + wakeupTime.ToString(@"hh\:mm")+" Mood: "+Convert.ToInt32(moodSlider.Value));
             if (SleepDataControl.checkExist(DateTime.Now) == true)
             {
-                SleepDataControl.Add(new SleepData(DateTime.Now, sleepTime, wakeupTime, Convert.ToInt32(moodSlider.Value), true));
+                SleepDataControl.Add(new SleepData(DateTime.Today, sleepTime, wakeupTime, Convert.ToInt32(moodSlider.Value), true));
             }
             else
             {
-                SleepDataControl.Add(new SleepData(DateTime.Now, sleepTime, wakeupTime, Convert.ToInt32(moodSlider.Value), false));
+                SleepDataControl.Add(new SleepData(DateTime.Today, sleepTime, wakeupTime, Convert.ToInt32(moodSlider.Value), false));
             }
             NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
         }
 
-        private void Record_Click(object sender, RoutedEventArgs e)
+        private void Image_Click(object sender, RoutedEventArgs e)
         {
             if (state == 0)
             {
@@ -271,7 +277,7 @@ namespace SleepFixer
             else if (state == 1)
             {
                 state = 2;
-                alarmTime = DateTime.Now.AddSeconds(snoozeTime);
+                alarmTime = DateTime.Now.AddMinutes(SettingsPage.snoozeTime.Value / 60);
                 alarmSound.Stop();
                 timeleftText.Text = "Snoozing: ";
                 //remainText.Foreground = new SolidColorBrush(Colors.White);
@@ -285,6 +291,28 @@ namespace SleepFixer
             if(moodSlider != null)
                 moodSlider.Value = Math.Round(moodSlider.Value);
         }
+
+        private void back_Hold(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            
+
+            if (SettingsPage.holdToStop.Value == true)
+            {
+                if (state == 1)
+                {
+                    alarmSound.Stop();
+                    wakeupTime = DateTime.Now.TimeOfDay;
+                    window.IsOpen = true;
+                }
+                else if (state == 2)
+                {
+                    alarmSound.Stop();
+                    wakeupTime = DateTime.Now.TimeOfDay;
+                    window.IsOpen = true;
+                }
+            }
+        }
+
 
 
 
