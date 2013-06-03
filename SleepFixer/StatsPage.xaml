@@ -14,7 +14,8 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    ApplicationBar="{StaticResource AppBar}">
     
     <phone:PhoneApplicationPage.Resources>
         <ResourceDictionary>
@@ -31,7 +32,96 @@
         <phone:Pivot Title="Sleep Fixer">
             <!--Pivot item one-->
             <phone:PivotItem Header="Sleep Score">
-                <Grid/>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Content="&lt;" Grid.Column="0" FontSize="{StaticResource PhoneFontSizeLarge}" Click="Previous_Click"/>
+                        <TextBlock x:Name="Text_Date" Text="2013-06" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+                        <Button Content="&gt;" Grid.Column="2" FontSize="{StaticResource PhoneFontSizeLarge}" Click="Next_Click"/>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Overall Sleep Score:" Grid.Column="0" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+                        <Border Background="Blue" Grid.Column="1">
+                            <TextBlock x:Name="Text_Score" Width="56" Height="56" Text="A" FontSize="{StaticResource PhoneFontSizeExtraLarge}" VerticalAlignment="Center" TextAlignment="Center"/>
+                        </Border>                    
+                    </Grid>
+                    <TextBlock x:Name="Text_Comment" Grid.Row="2" Text="Your sleep is very good!" FontSize="{StaticResource PhoneFontSizeMedium}"/>
+                    <Grid Grid.Row="3" Margin="0 15 0 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="52"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Details:" FontSize="{StaticResource PhoneFontSizeLarge}" Grid.ColumnSpan="3" Margin="0 0 0 10"/>
+                        <Border Background="Blue"  Grid.Column="0" Grid.Row="1" BorderBrush="White" BorderThickness="1" >
+                            <TextBlock x:Name="Text_AvgHoursScore" Width="56" Height="56" Text="A" FontSize="{StaticResource PhoneFontSizeExtraLarge}" VerticalAlignment="Center" TextAlignment="Center"/>                        
+                        </Border>
+                        <Border Background="Blue"  Grid.Column="0" Grid.Row="2" BorderBrush="White" BorderThickness="1" >
+                            <TextBlock x:Name="Text_VarHoursScore" Width="56" Height="56" Text="A" FontSize="{StaticResource PhoneFontSizeExtraLarge}" VerticalAlignment="Center" TextAlignment="Center"/>
+                        </Border>
+                        <Border Background="Blue"  Grid.Column="0" Grid.Row="3" BorderBrush="White" BorderThickness="1" >
+                            <TextBlock x:Name="Text_AvgBedScore" Width="56" Height="56" Text="A" FontSize="{StaticResource PhoneFontSizeExtraLarge}" VerticalAlignment="Center" TextAlignment="Center"/>
+                        </Border>
+                        <Border Background="Blue"  Grid.Column="0" Grid.Row="4" BorderBrush="White" BorderThickness="1" >
+                            <TextBlock x:Name="Text_VarBedScore" Width="56" Height="56" Text="A" FontSize="{StaticResource PhoneFontSizeExtraLarge}" VerticalAlignment="Center" TextAlignment="Center"/>
+                        </Border>
+                        <Border Background="Blue"  Grid.Column="0" Grid.Row="5" BorderBrush="White" BorderThickness="1" >
+                            <TextBlock x:Name="Text_AvgMoodScore" Width="56" Height="56" Text="A" FontSize="{StaticResource PhoneFontSizeExtraLarge}" VerticalAlignment="Center" TextAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Column="1" Grid.Row="1" BorderBrush="White" BorderThickness="1">
+                            <TextBlock Text="Average Sleep Hours (30%)" FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Center" Margin="5"/>
+                        </Border>
+                        <Border Grid.Column="1" Grid.Row="2" BorderBrush="White"  BorderThickness="1">
+                            <TextBlock Text="Std. Deviation of Sleep Hours (25%)" FontSize="21" VerticalAlignment="Center" Margin="5"/>
+                        </Border>
+                        <Border Grid.Column="1" Grid.Row="3" BorderBrush="White"  BorderThickness="1">
+                            <TextBlock Text="Average Go-to-bed time (20%)" FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Center"  Margin="5"/>
+                        </Border>
+                        <Border Grid.Column="1" Grid.Row="4" BorderBrush="White"  BorderThickness="1">
+                            <TextBlock Text="Std. Deviation of Go-to-bed time (15%)" FontSize="19" VerticalAlignment="Center" Margin="5" />
+                        </Border>
+                        <Border Grid.Column="1" Grid.Row="5" BorderBrush="White"  BorderThickness="1">
+                            <TextBlock Text="Average Wake-up Mood (10%)" FontSize="{StaticResource PhoneFontSizeMedium}" VerticalAlignment="Center"  Margin="5"/>
+                        </Border>
+                        <Border Grid.Column="2" Grid.Row="1" BorderBrush="White"  BorderThickness="1">
+                            <TextBlock x:Name="Text_AvgHours" Text="10.0" FontSize="{StaticResource PhoneFontSizeNormal}" VerticalAlignment="Center" Margin="5" TextAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Column="2" Grid.Row="2" BorderBrush="White"  BorderThickness="1">
+                            <TextBlock x:Name="Text_VarHours" Text="10.0" FontSize="{StaticResource PhoneFontSizeNormal}" VerticalAlignment="Center" Margin="5"  TextAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Column="2" Grid.Row="3" BorderBrush="White" BorderThickness="1">
+                            <TextBlock x:Name="Text_AvgBed" Text="22:22" FontSize="16" VerticalAlignment="Center" Margin="5"  TextAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Column="2" Grid.Row="4" BorderBrush="White" BorderThickness="1">
+                            <TextBlock x:Name="Text_VarBed" Text="10.0" FontSize="{StaticResource PhoneFontSizeNormal}" VerticalAlignment="Center" Margin="5"  TextAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Column="2" Grid.Row="5" BorderBrush="White" BorderThickness="1">
+                            <TextBlock x:Name="Text_AvgMood" Text="10.0" FontSize="{StaticResource PhoneFontSizeNormal}" VerticalAlignment="Center" Margin="5"  TextAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </Grid>
             </phone:PivotItem>
 
             <!--Pivot item two-->

@@ -34,7 +34,7 @@ namespace SleepFixer
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            SleepDataControl.LoadJogs();
+            //SleepDataControl.LoadJogs();
             radCalendar.AppointmentSource = new HistoryData();
             DataTemplateSelector dts = radCalendar.ItemTemplateSelector;
             radCalendar.ItemTemplateSelector = null;
@@ -46,7 +46,7 @@ namespace SleepFixer
             
             SleepDataControl.Random();
 
-            SleepDataControl.LoadJogs();
+            //SleepDataControl.LoadJogs();
             radCalendar.AppointmentSource = new HistoryData();
             DataTemplateSelector dts = radCalendar.ItemTemplateSelector;
             radCalendar.ItemTemplateSelector = null;

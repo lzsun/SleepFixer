@@ -103,7 +103,7 @@
         <!--<ListBox x:Name="resultList" Grid.Row="1" Margin="50,0,50,0"/>-->
 
         <!--ContentPanel - place additional content here-->
-        <telerikInput:RadCalendar x:Name="radCalendar" Grid.Row="1" Height="590" Margin="10" MonthInfoDisplayMode="Small"
+        <telerikInput:RadCalendar x:Name="radCalendar" Grid.Row="1" Height="560" Margin="10" MonthInfoDisplayMode="Small"
                                   ItemTemplateSelector="{StaticResource WeekendDaySelector}"
                                   DisplayDateChanged="radCalendar_DisplayDateChanged"
                                   ItemTap="radCalendar_ItemTap">

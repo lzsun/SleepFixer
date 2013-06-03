@@ -14,6 +14,11 @@ namespace SleepFixer
         private const string FILE_NAME = "SleepLog.xml";
 
         public static SleepDataRoot jogs = new SleepDataRoot();
+
+        static SleepDataControl()
+        {
+            LoadJogs();
+        }
        
         public static void LoadJogs()
         {
@@ -84,11 +89,11 @@ namespace SleepFixer
         //Generate Random Data
         public static void Random()
         {
-            DateTime wake = new DateTime(2013, 3, 10, 6, 0, 0);
-            DateTime sleep = new DateTime(2013, 3, 10, 22, 0, 0);
+            DateTime wake = new DateTime(2013, 1, 1, 6, 0, 0);
+            DateTime sleep = new DateTime(2013, 1, 1, 22, 0, 0);
             Random r = new Random();
             jogs = new SleepDataRoot();
-            for (int i = 0; i < 60; i++)
+            for (int i = 0; i < 150; i++)
             {
                 SleepData s = new SleepData(
                     wake.AddDays(i),         

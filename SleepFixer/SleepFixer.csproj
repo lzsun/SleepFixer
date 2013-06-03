@@ -99,6 +99,7 @@
     </Compile>
     <Compile Include="BarLabelTemplateSelector.cs" />
     <Compile Include="Data\HistoryData.cs" />
+    <Compile Include="Data\SleepScore.cs" />
     <Compile Include="Data\StoredItem.cs" />
     <Compile Include="HistoryPage.xaml.cs">
       <DependentUpon>HistoryPage.xaml</DependentUpon>
