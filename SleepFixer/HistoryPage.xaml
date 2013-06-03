@@ -6,7 +6,10 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input" 
+    xmlns:telerikInput="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Input"
+    xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:telerikCore="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Core"
+    xmlns:local="clr-namespace:SleepFixer"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -14,6 +17,54 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     shell:SystemTray.IsVisible="True"
     ApplicationBar="{StaticResource AppBar}">
+
+    <phone:PhoneApplicationPage.Resources>
+        <local:MoodSelector x:Key="WeekendDaySelector">
+            <local:MoodSelector.MoodTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding Text}" FontWeight="Bold" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="2,0,0,0" HorizontalAlignment="Left" />
+                    </Grid>
+                </DataTemplate>
+            </local:MoodSelector.MoodTemplate>
+            <local:MoodSelector.MoodTemplate1>
+                <DataTemplate>
+                    <Grid>
+                        <Image Source="/Images/mood.1.png" Width="48" Margin="0,22,2,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding DetailText}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,2,0" TextAlignment="Right" FontSize="18" Foreground="LightBlue" />
+                        <TextBlock Text="{Binding Text}" FontWeight="Bold" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="2,0,0,0" HorizontalAlignment="Left" />
+                    </Grid>
+                </DataTemplate>
+            </local:MoodSelector.MoodTemplate1>
+            <local:MoodSelector.MoodTemplate2>
+                <DataTemplate>
+                    <Grid>
+                        <Image Source="/Images/mood.2.png" Width="48" Margin="0,22,2,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding DetailText}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,2,0" TextAlignment="Right" FontSize="18" Foreground="LightBlue" />
+                        <TextBlock Text="{Binding Text}" FontWeight="Bold" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="2,0,0,0" HorizontalAlignment="Left" />
+                    </Grid>
+                </DataTemplate>
+            </local:MoodSelector.MoodTemplate2>
+            <local:MoodSelector.MoodTemplate3>
+                <DataTemplate>
+                    <Grid>
+                        <Image Source="/Images/mood.3.png" Width="48" Margin="0,22,2,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding DetailText}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,2,0" TextAlignment="Right" FontSize="18" Foreground="LightBlue" />
+                        <TextBlock Text="{Binding Text}" FontWeight="Bold" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="2,0,0,0" HorizontalAlignment="Left" />
+                    </Grid>
+                </DataTemplate>
+            </local:MoodSelector.MoodTemplate3>
+            <local:MoodSelector.MoodTemplate4>
+                <DataTemplate>
+                    <Grid>
+                        <Image Source="/Images/mood.4.png" Width="48" Margin="0,22,2,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding DetailText}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,2,0" TextAlignment="Right" FontSize="18" Foreground="LightBlue" />
+                        <TextBlock Text="{Binding Text}" FontWeight="Bold" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="2,0,0,0" HorizontalAlignment="Left" />
+                    </Grid>
+                </DataTemplate>
+            </local:MoodSelector.MoodTemplate4>
+        </local:MoodSelector>
+    </phone:PhoneApplicationPage.Resources>
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -52,26 +103,57 @@
         <!--<ListBox x:Name="resultList" Grid.Row="1" Margin="50,0,50,0"/>-->
 
         <!--ContentPanel - place additional content here-->
-        <telerikInput:RadCalendar x:Name="radCalendar" Grid.Row="1" Height="540" Margin="10" MonthInfoDisplayMode="Small" >
-            <telerikInput:RadCalendar.ItemTemplate>
+        <telerikInput:RadCalendar x:Name="radCalendar" Grid.Row="1" Height="590" Margin="10" MonthInfoDisplayMode="Small"
+                                  ItemTemplateSelector="{StaticResource WeekendDaySelector}"
+                                  DisplayDateChanged="radCalendar_DisplayDateChanged"
+                                  ItemTap="radCalendar_ItemTap">
+            <!--<telerikInput:RadCalendar.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <TextBlock Text="{Binding DetailText}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,2,0" TextAlignment="Right" FontSize="14" Foreground="LightBlue" />
                         <TextBlock Text="{Binding Text}" FontWeight="Bold" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="2,0,0,0" HorizontalAlignment="Left" />
                     </Grid>
                 </DataTemplate>
-            </telerikInput:RadCalendar.ItemTemplate>
-
+            </telerikInput:RadCalendar.ItemTemplate>-->
         </telerikInput:RadCalendar>
 
+        <telerikPrimitives:RadModalWindow x:Name="window" Placement="CenterCenter">
+            <Border Background="Black" Width="300" BorderBrush="White" BorderThickness="2">
+                <StackPanel Orientation="Vertical">
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <TextBlock Text="Sleep Time:"/>
+                            <TextBlock Text="Wakeup Time:"/>
+                            <TextBlock Text="Sleep Hours:"/>
+                            <TextBlock Text="Mood:"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <TextBlock x:Name="DetailSleepTime"/>
+                            <TextBlock x:Name="DetailWakeupTime"/>
+                            <TextBlock x:Name="DetailSleepHours"/>
+                            <Image x:Name="DetailMood" Height="48" HorizontalAlignment="Left"/>
+                        </StackPanel>
+                    </Grid>
+                    <Button Content="OK" Click="OK_Click"/>
+                </StackPanel>
+            </Border>
 
-            <Grid  x:Name="ContentPanel" Grid.Row="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <telerikPrimitives:RadModalWindow.OpenAnimation>
+                <telerikCore:RadPlaneProjectionAnimation CenterY="0.5" CenterX="0" StartAngleX="-90" EndAngleX="0" Axes="X">
+                    <telerikCore:RadPlaneProjectionAnimation.Easing>
+                        <CubicEase EasingMode="EaseOut"/>
+                    </telerikCore:RadPlaneProjectionAnimation.Easing>
+                </telerikCore:RadPlaneProjectionAnimation>
+            </telerikPrimitives:RadModalWindow.OpenAnimation>
+        </telerikPrimitives:RadModalWindow>
+
+
+        <Grid  x:Name="ContentPanel" Grid.Row="3" >
             <Button Click="Random_Click" Content="Random" VerticalAlignment="Center" Grid.Column="0" FontSize="14"/>
-            <Button Content="Display" Click="Display_Click" VerticalAlignment="Center" Grid.Column="1" FontSize="14"/>
         </Grid>
 
         
@@ -83,5 +165,8 @@
             Before shipping remove this XAML and the image itself.-->
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
     </Grid>
+
+
+
 
 </phone:PhoneApplicationPage>

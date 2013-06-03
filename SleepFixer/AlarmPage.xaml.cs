@@ -277,7 +277,8 @@ namespace SleepFixer
             else if (state == 1)
             {
                 state = 2;
-                alarmTime = DateTime.Now.AddMinutes(SettingsPage.snoozeTime.Value / 60);
+                //alarmTime = DateTime.Now.AddMinutes(SettingsPage.snoozeTime.Value);
+                alarmTime = DateTime.Now.AddSeconds(SettingsPage.snoozeTime.Value);
                 alarmSound.Stop();
                 timeleftText.Text = "Snoozing: ";
                 //remainText.Foreground = new SolidColorBrush(Colors.White);

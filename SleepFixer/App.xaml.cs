@@ -273,8 +273,8 @@ namespace SleepFixer
 
         private void Stats_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Not Implemented");
-            //(Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/HistoryPage.xaml", UriKind.Relative));
+           // MessageBox.Show("Not Implemented");
+            (Application.Current.RootVisual as PhoneApplicationFrame).Navigate(new Uri("/StatsPage.xaml", UriKind.Relative));
 
         }
 

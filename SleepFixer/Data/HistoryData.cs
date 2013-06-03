@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using Telerik.Windows.Controls;
+using Telerik.Windows.Controls.Calendar;
 
 namespace SleepFixer
 {
@@ -28,159 +30,17 @@ namespace SleepFixer
                     {
                         StartDate = data.Date,
                         EndDate = data.Date.AddHours(1),
-                        Subject = "S: " + (SettingsPage.is24Hr.Value ? data.SleeptimeString :DateTime.Today.Add(data.SleepTime).ToString("hh:mmt"))
+                        Mood = data.Mood.ToString(),
+                        Subject = sleepHours.ToString(@"h\hmm\m"),
+                        Data = data
+                        /*Subject = "S: " + (SettingsPage.is24Hr.Value ? data.SleeptimeString :DateTime.Today.Add(data.SleepTime).ToString("hh:mmt"))
                             + System.Environment.NewLine + "W: " + (SettingsPage.is24Hr.Value ? data.WakeupTimeString : DateTime.Today.Add(data.WakeupTime).ToString("hh:mmt"))
                             + System.Environment.NewLine + sleepHours.ToString(@"h\hmm\m")
-                            + System.Environment.NewLine + "M: " + data.Mood.ToString()
+                            + System.Environment.NewLine + "M: " + data.Mood.ToString()*/
                     });
                 }
                 
             }
-            /*this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now,
-                EndDate = DateTime.Now.AddHours(1),
-                Subject = "Today Appointment 1",
-                Details = "Some Long Details are coming here",
-                Location = "My Home Town"
-            });
-
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddMinutes(30),
-                EndDate = DateTime.Now.AddHours(1),
-                Subject = "Today Appointment 2",
-
-                Details = "Some Long Details are coming here",
-                Location = "Paris"
-            });
-
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddMinutes(30),
-                EndDate = DateTime.Now.AddHours(1),
-                Subject = "Today Appointment 3",
-                Details = "Some Long Details are coming here",
-                Location = "London"
-
-            });
-
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddHours(2),
-                EndDate = DateTime.Now.AddHours(3),
-                Subject = "Today Appointment 4",
-
-                Details = "Some Long Details are coming here",
-                Location = "Berlin"
-            });
-
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddDays(1),
-                EndDate = DateTime.Now.AddDays(1).AddHours(1),
-                Subject = "Check Game scores",
-
-                Details = "Some Long Details are coming here",
-                Location = "Redmond"
-            });
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddDays(1),
-                EndDate = DateTime.Now.AddDays(3),
-                Subject = "Long run",
-
-                Details = "Some Long Details are coming here",
-                Location = "Seattle"
-            });
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.Date.AddDays(6),
-                EndDate = DateTime.Now.Date.AddDays(7),
-                Subject = "Long run",
-
-                Details = "Some Long Details are coming here",
-                Location = "Honolulu"
-            });
-
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddDays(4),
-                EndDate = DateTime.Now.AddDays(4).AddHours(1),
-                Subject = "Go to cinema",
-
-                Details = "Some Long Details are coming here",
-                Location = "Lihue"
-            });
-
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddDays(-1),
-                EndDate = DateTime.Now.AddDays(-1).AddHours(1),
-                Subject = "Wash the car",
-
-                Details = "Some Long Details are coming here",
-                Location = "Rome"
-            });
-
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddDays(7),
-                EndDate = DateTime.Now.AddDays(7).AddHours(1),
-                Subject = "Sail the boat",
-
-                Details = "Some Long Details are coming here",
-                Location = "Vienna"
-            });
-
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddDays(7),
-                EndDate = DateTime.Now.AddDays(7).AddHours(1),
-                Subject = "Feed the fish",
-
-                Details = "Some Long Details are coming here",
-                Location = "Sofia"
-            });
-
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddDays(8),
-                EndDate = DateTime.Now.AddDays(8).AddHours(1),
-                Subject = "Go to ski",
-
-                Details = "Some Long Details are coming here",
-                Location = "Zermatt"
-            });
-
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddMonths(1),
-                EndDate = DateTime.Now.AddMonths(1).AddHours(12),
-                Subject = "Have fun with the kids",
-
-                Details = "Some Long Details are coming here",
-                Location = "Skiathos"
-            });
-
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddMonths(1),
-                EndDate = DateTime.Now.AddMonths(1).AddHours(12),
-                Subject = "Go to MIX",
-
-                Details = "Some Long Details are coming here",
-                Location = "Las Vegas"
-            });
-
-            this.AllAppointments.Add(new SampleAppointment()
-            {
-                StartDate = DateTime.Now.AddMonths(1),
-                EndDate = DateTime.Now.AddMonths(1).AddHours(12),
-                Subject = "Visit Kauai",
-                Details = "Some Long Details are coming here",
-                Location = "Lihue"
-            });*/
 			this.OnDataLoaded();
 		}
 	}
@@ -214,23 +74,18 @@ namespace SleepFixer
 			set;
 		}
 
-		/// <summary>
-		/// Gets the details of the appointment.
-		/// </summary>
-		public string Details
+		public string Mood
 		{
 			get;
 			set;
 		}
 
-		/// <summary>
-		/// Gets the location of the appointment.
-		/// </summary>
-		public string Location
-		{
-			get;
-			set;
-		}
+        public SleepData Data
+        {
+            get;
+            set;
+        }
+
 
 		/// <summary>
 		/// Gets a string representation of the appointment
@@ -241,4 +96,7 @@ namespace SleepFixer
 			return this.Subject;
 		}
 	}
+
+    
+
 }

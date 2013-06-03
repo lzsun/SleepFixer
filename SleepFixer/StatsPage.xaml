@@ -1,0 +1,103 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="SleepFixer.StatsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compat00ibility/2006"
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Chart"
+    xmlns:telerikCharting="clr-namespace:Telerik.Charting;assembly=Telerik.Windows.Controls.Chart"
+    xmlns:local="clr-namespace:SleepFixer"
+    
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+    
+    <phone:PhoneApplicationPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="CommonStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--Pivot Control-->
+        <phone:Pivot Title="Sleep Fixer">
+            <!--Pivot item one-->
+            <phone:PivotItem Header="Sleep Score">
+                <Grid/>
+            </phone:PivotItem>
+
+            <!--Pivot item two-->
+            <phone:PivotItem Header="Sleep Hours">
+                <Grid>
+                    <telerikChart:RadCartesianChart Margin="12,0,0,0" x:Name="radChart1">
+                        <telerikChart:RadCartesianChart.Grid>
+                            <telerikChart:CartesianChartGrid MajorLinesVisibility="Y" StripLinesVisibility="Y">
+                                <telerikChart:CartesianChartGrid.YStripeBrushes>
+                                    <SolidColorBrush Color="#33666666"/>
+                                    <SolidColorBrush Color="Transparent"/>
+                                </telerikChart:CartesianChartGrid.YStripeBrushes>
+                            </telerikChart:CartesianChartGrid>
+                        </telerikChart:RadCartesianChart.Grid>
+                        <telerikChart:RadCartesianChart.HorizontalAxis>
+                            <telerikChart:CategoricalAxis Style="{StaticResource baseAxisStyle}"  />
+                        </telerikChart:RadCartesianChart.HorizontalAxis>
+                        <telerikChart:RadCartesianChart.VerticalAxis>
+                            <telerikChart:LinearAxis Minimum="0"
+                                         Maximum="12"
+                                         MajorStep="1"
+                                         LineStroke="Transparent"
+                                         Style="{StaticResource linearAxisStyle}"/>
+                        </telerikChart:RadCartesianChart.VerticalAxis>
+
+                        <telerikChart:BarSeries>
+                            <telerikChart:BarSeries.PointTemplates>
+                                <DataTemplate>
+                                    <Border Background="Blue"
+                                BorderThickness="2"/>
+                                </DataTemplate>
+
+                                <DataTemplate>
+                                    <Border Background="Blue"
+                                BorderThickness="2"/>
+                                </DataTemplate>
+
+                                <DataTemplate>
+                                    <Border Background="Blue"
+                                BorderThickness="2"/>
+                                </DataTemplate>
+
+                                <DataTemplate>
+                                    <Border Background="Blue"
+                                BorderThickness="2"/>
+                                </DataTemplate>
+
+                                <DataTemplate>
+                                    <Border Background="Blue"
+                                BorderThickness="2"/>
+                                </DataTemplate>
+
+                                <DataTemplate>
+                                    <Border Background="Blue"
+                                BorderThickness="2"/>
+                                </DataTemplate>
+                            </telerikChart:BarSeries.PointTemplates>
+                        </telerikChart:BarSeries>
+                    </telerikChart:RadCartesianChart>
+                </Grid>
+            </phone:PivotItem>
+
+            <phone:PivotItem Header="Sleep Time">
+                <Grid/>
+            </phone:PivotItem>
+        </phone:Pivot>
+    </Grid>
+    
+</phone:PhoneApplicationPage>
