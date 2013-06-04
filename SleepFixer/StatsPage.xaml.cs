@@ -25,7 +25,7 @@ namespace SleepFixer
         public StatsPage()
         {
             InitializeComponent();
-            datePick = DateTime.Now;
+            datePick = DateTime.Today;
             update();
 
             this.radChart1.Series[0].ItemsSource = new double[] { 7.5, 8, 8.5, 7.2, 6.5, 9 ,8};

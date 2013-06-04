@@ -31,7 +31,12 @@
         <!--Pivot Control-->
         <phone:Pivot Title="Sleep Fixer">
             <!--Pivot item one-->
-            <phone:PivotItem Header="Sleep Score">
+            <phone:PivotItem>
+                <phone:PivotItem.Header>
+                    <Grid>
+                        <TextBlock FontSize="48" Text="Sleep Score" />
+                    </Grid>
+                </phone:PivotItem.Header>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -125,7 +130,12 @@
             </phone:PivotItem>
 
             <!--Pivot item two-->
-            <phone:PivotItem Header="Sleep Hours">
+            <phone:PivotItem >
+                <phone:PivotItem.Header>
+                    <Grid>
+                        <TextBlock FontSize="48" Text="Sleep Hours" />
+                    </Grid>
+                </phone:PivotItem.Header>
                 <Grid>
                     <telerikChart:RadCartesianChart Margin="12,0,0,0" x:Name="radChart1">
                         <telerikChart:RadCartesianChart.Grid>
@@ -184,8 +194,26 @@
                 </Grid>
             </phone:PivotItem>
 
-            <phone:PivotItem Header="Sleep Time">
-                <Grid/>
+            <phone:PivotItem>
+                <phone:PivotItem.Header>
+                    <Grid>
+                        <TextBlock FontSize="48" Text="Sleep Hours by Week Day" />
+                    </Grid>
+                </phone:PivotItem.Header>
+                <Grid>
+                    <local:SleepHoursByDayControl/>
+                </Grid>
+            </phone:PivotItem>
+
+            <phone:PivotItem>
+                <phone:PivotItem.Header>
+                    <Grid>
+                        <TextBlock FontSize="48" Text="Wake-up Mood" />
+                    </Grid>
+                </phone:PivotItem.Header>
+                <Grid>
+                    <local:MoodControl/>
+                </Grid> 
             </phone:PivotItem>
         </phone:Pivot>
     </Grid>

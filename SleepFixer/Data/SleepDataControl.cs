@@ -99,7 +99,7 @@ namespace SleepFixer
                     wake.AddDays(i),         
                     sleep.AddMinutes(r.Next(0, 240)).TimeOfDay,
                     wake.AddMinutes(r.Next(0, 240)).TimeOfDay,
-                    r.Next(1,5),
+                    r.Next(1,6),
                     false);
                 jogs.Sleep.Add(s);
             }

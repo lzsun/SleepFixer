@@ -114,6 +114,12 @@ namespace SleepFixer
             set;
         }
 
+        public DataTemplate MoodTemplate5
+        {
+            get;
+            set;
+        }
+
         public DataTemplate MoodTemplate
         {
             get;
@@ -136,6 +142,8 @@ namespace SleepFixer
                 return MoodTemplate3;
             else if (button.Appointments != null && button.Appointments.Count() > 0 && (button.Appointments.Cast<SampleAppointment>().ToArray())[0].Mood == "4")
                 return MoodTemplate4;
+            else if (button.Appointments != null && button.Appointments.Count() > 0 && (button.Appointments.Cast<SampleAppointment>().ToArray())[0].Mood == "5")
+                return MoodTemplate5;
             else
                 return MoodTemplate;
         }

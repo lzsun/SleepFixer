@@ -63,6 +63,15 @@
                     </Grid>
                 </DataTemplate>
             </local:MoodSelector.MoodTemplate4>
+            <local:MoodSelector.MoodTemplate5>
+                <DataTemplate>
+                    <Grid>
+                        <Image Source="/Images/mood.5.png" Width="48" Margin="0,22,2,0" VerticalAlignment="Top" HorizontalAlignment="Right"/>
+                        <TextBlock Text="{Binding DetailText}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,2,0" TextAlignment="Right" FontSize="18" Foreground="LightBlue" />
+                        <TextBlock Text="{Binding Text}" FontWeight="Bold" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="2,0,0,0" HorizontalAlignment="Left" />
+                    </Grid>
+                </DataTemplate>
+            </local:MoodSelector.MoodTemplate5>
         </local:MoodSelector>
     </phone:PhoneApplicationPage.Resources>
 

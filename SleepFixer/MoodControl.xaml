@@ -1,0 +1,114 @@
+﻿<UserControl x:Class="SleepFixer.MoodControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Chart"
+    xmlns:telerikCharting="clr-namespace:Telerik.Charting;assembly=Telerik.Windows.Controls.Chart"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="580" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.Resources>
+            <SolidColorBrush x:Key="Brush0" Color="Gold"/>
+            <SolidColorBrush x:Key="Brush1" Color="Turquoise"/>
+            <SolidColorBrush x:Key="Brush2" Color="LimeGreen"/>
+            <SolidColorBrush x:Key="Brush3" Color="Orange"/>
+            <SolidColorBrush x:Key="Brush4" Color="Pink"/>
+
+            <Style x:Key="BasePieStyle" TargetType="Path">
+                <Setter Property="StrokeThickness" Value="2"/>
+                <Setter Property="Stroke" Value="{StaticResource PhoneForegroundBrush}"/>
+            </Style>
+        </Grid.Resources>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="Gold" Grid.Column="0" Margin="5"/>
+            <Image Source="/Images/mood.1.png" Grid.Column="1"/>
+            <Border Background="Turquoise" Grid.Column="2" Margin="5"/>
+            <Image Source="/Images/mood.2.png" Grid.Column="3"/>
+            <Border Background="LimeGreen" Grid.Column="4" Margin="5"/>
+            <Image Source="/Images/mood.3.png" Grid.Column="5"/>
+            <Border Background="Orange" Grid.Column="6" Margin="5"/>
+            <Image Source="/Images/mood.4.png" Grid.Column="7"/>
+            <Border Background="Pink" Grid.Column="8" Margin="5"/>
+            <Image Source="/Images/mood.5.png" Grid.Column="9"/>
+        </Grid>
+        <telerikChart:RadPieChart x:Name="radPieChart" Grid.Row="1" Margin="12">
+            <telerikChart:PieSeries>
+                <telerikChart:PieSeries.SliceStyles>
+                    <Style BasedOn="{StaticResource BasePieStyle}"
+                               TargetType="Path">
+                        <Setter Property="Fill" Value="{StaticResource Brush0}"/>
+                    </Style>
+                    <Style BasedOn="{StaticResource BasePieStyle}"
+                               TargetType="Path">
+                        <Setter Property="Fill" Value="{StaticResource Brush1}"/>
+                    </Style>
+                    <Style BasedOn="{StaticResource BasePieStyle}"
+                               TargetType="Path">
+                        <Setter Property="Fill" Value="{StaticResource Brush2}"/>
+                    </Style>
+                    <Style BasedOn="{StaticResource BasePieStyle}"
+                               TargetType="Path">
+                        <Setter Property="Fill" Value="{StaticResource Brush3}"/>
+                    </Style>
+                    <Style BasedOn="{StaticResource BasePieStyle}"
+                               TargetType="Path">
+                        <Setter Property="Fill" Value="{StaticResource Brush4}"/>
+                    </Style>
+                </telerikChart:PieSeries.SliceStyles>
+                <telerikChart:PieSeries.AngleRange>
+                    <telerikCharting:AngleRange StartAngle="90" SweepAngle="360"/>
+                </telerikChart:PieSeries.AngleRange>
+
+                <telerikChart:PieSeries.LabelTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Label}" FontSize="20" FontWeight="Bold" Foreground="DimGray"/>
+                    </DataTemplate>
+                </telerikChart:PieSeries.LabelTemplate>
+            </telerikChart:PieSeries>
+        </telerikChart:RadPieChart>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <RadioButton Grid.Column="0" Content="Week" IsChecked="true" Click="Week_Click"/>
+            <RadioButton Grid.Column="1" Content="Month" Click="Month_Click"/>
+            <RadioButton Grid.Column="2" Content="Year" Click="Year_Click"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button Content="&lt;" Grid.Column="0" FontSize="{StaticResource PhoneFontSizeLarge}" Click="Previous_Click"/>
+            <TextBlock x:Name="Text_Date" Text="2013-06" Grid.Column="1" TextAlignment="Center" VerticalAlignment="Center" FontSize="{StaticResource PhoneFontSizeExtraLarge}"/>
+            <Button Content="&gt;" Grid.Column="2" FontSize="{StaticResource PhoneFontSizeLarge}" Click="Next_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>
