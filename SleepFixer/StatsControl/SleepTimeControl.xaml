@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="SleepFixer.SleepTimeControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Chart"
+    xmlns:telerikCharting="clr-namespace:Telerik.Charting;assembly=Telerik.Windows.Controls.Chart"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DesignHeight="580" d:DesignWidth="480">
+    
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <Ellipse Width="16" Height="16" Fill="{StaticResource Series1Brush}"/>
+            <TextBlock Text="Go-to-bed Time" Margin="6,0,0,0"/>
+            <Ellipse Width="16" Height="16" Fill="{StaticResource Series2Brush}" Margin="20,0,0,0"/>
+            <TextBlock Text="Wake-up Time" Margin="6,0,0,0"/>
+        </StackPanel>
+        <telerikChart:RadCartesianChart x:Name="radChart" Zoom="5,1" MaxZoom="20,1" Grid.Row="1">
+            <telerikChart:RadCartesianChart.Behaviors>
+                <telerikChart:ChartPanAndZoomBehavior ZoomMode="Horizontal" PanMode="Horizontal"/>
+                <telerikChart:ChartTrackBallBehavior ShowTrackInfo="True" ShowIntersectionPoints="True" TrackInfoUpdated="ChartTrackBallBehavior_TrackInfoUpdated"/>
+            </telerikChart:RadCartesianChart.Behaviors>
+            <telerikChart:RadCartesianChart.HorizontalAxis>
+                <telerikChart:DateTimeContinuousAxis Style="{StaticResource baseAxisStyle}" LabelFitMode="Rotate" LabelFormat="MMM-dd-yy" MajorStep="7" MajorStepUnit="Day" PlotMode="OnTicks"/>
+            </telerikChart:RadCartesianChart.HorizontalAxis>
+            <telerikChart:RadCartesianChart.VerticalAxis>
+                <telerikChart:LinearAxis MajorStep="4" Minimum="-8" Maximum="16" Style="{StaticResource linearAxisStyleWithTicks}"/>
+            </telerikChart:RadCartesianChart.VerticalAxis>
+            <telerikChart:RadCartesianChart.Grid>
+                <telerikChart:CartesianChartGrid MajorLinesVisibility="Y" Style="{StaticResource gridStyleDashedAll}"/>
+            </telerikChart:RadCartesianChart.Grid>
+            <telerikChart:LineSeries Stroke="{StaticResource Series1Brush}" StrokeThickness="2">
+                <telerikChart:LineSeries.TrackBallTemplate>
+                    <DataTemplate>
+                        <Ellipse Width="12" Height="12" Fill="{StaticResource Series1Brush}"/>
+                    </DataTemplate>
+                </telerikChart:LineSeries.TrackBallTemplate>
+            </telerikChart:LineSeries>
+            <telerikChart:LineSeries   Stroke="{StaticResource Series2Brush}" StrokeThickness="2">
+                <telerikChart:LineSeries.TrackBallTemplate>
+                    <DataTemplate>
+                        <Ellipse Width="12" Height="12" Fill="{StaticResource Series1Brush}"/>
+                    </DataTemplate>
+                </telerikChart:LineSeries.TrackBallTemplate>
+            </telerikChart:LineSeries>
+        </telerikChart:RadCartesianChart>
+    </Grid>
+</UserControl>

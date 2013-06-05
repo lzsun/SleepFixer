@@ -20,7 +20,7 @@ namespace SleepFixer
         {
             InitializeComponent();
             datePick = DateTime.Today;
-            int week = datePick.DayOfYear / 7 + 1;
+            int week = Convert.ToInt32(Math.Ceiling((double)datePick.DayOfYear / 7));
             Text_Date.Text = datePick.Year.ToString() + " W" + week.ToString();
             Calc();
         }
@@ -30,7 +30,7 @@ namespace SleepFixer
             if (scale == 0)
             {
                 datePick = datePick.AddDays(-7);
-                int week = datePick.DayOfYear / 7 + 1;
+                int week = Convert.ToInt32(Math.Ceiling((double)datePick.DayOfYear / 7));
                 Text_Date.Text = datePick.Year.ToString() + " W" + week.ToString();
             }
             else if (scale == 1)
@@ -51,7 +51,7 @@ namespace SleepFixer
             if (scale == 0)
             {
                 datePick = datePick.AddDays(7);
-                int week = datePick.DayOfYear / 7 + 1;
+                int week = Convert.ToInt32(Math.Ceiling((double)datePick.DayOfYear / 7));
                 Text_Date.Text = datePick.Year.ToString() + " W" + week.ToString();
             }
             else if (scale == 1)
@@ -70,7 +70,7 @@ namespace SleepFixer
         private void Week_Click(object sender, RoutedEventArgs e)
         {
             scale = 0;
-            int week = datePick.DayOfYear / 7 + 1;
+            int week = Convert.ToInt32(Math.Ceiling((double)datePick.DayOfYear / 7));
             Text_Date.Text = datePick.Year.ToString() + " W" + week.ToString();
             Calc();
         }

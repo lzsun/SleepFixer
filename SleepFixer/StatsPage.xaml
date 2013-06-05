@@ -42,6 +42,17 @@
                 </Grid>
             </phone:PivotItem>
 
+            <phone:PivotItem >
+                <phone:PivotItem.Header>
+                    <Grid>
+                        <TextBlock FontSize="48" Text="Time History" />
+                    </Grid>
+                </phone:PivotItem.Header>
+                <Grid>
+                    <local:SleepTimeControl/>
+                </Grid>
+            </phone:PivotItem>
+
             <!--Pivot item two-->
             <phone:PivotItem >
                 <phone:PivotItem.Header>
@@ -50,60 +61,7 @@
                     </Grid>
                 </phone:PivotItem.Header>
                 <Grid>
-                    <telerikChart:RadCartesianChart Margin="12,0,0,0" x:Name="radChart1">
-                        <telerikChart:RadCartesianChart.Grid>
-                            <telerikChart:CartesianChartGrid MajorLinesVisibility="Y" StripLinesVisibility="Y">
-                                <telerikChart:CartesianChartGrid.YStripeBrushes>
-                                    <SolidColorBrush Color="#33666666"/>
-                                    <SolidColorBrush Color="Transparent"/>
-                                </telerikChart:CartesianChartGrid.YStripeBrushes>
-                            </telerikChart:CartesianChartGrid>
-                        </telerikChart:RadCartesianChart.Grid>
-                        <telerikChart:RadCartesianChart.HorizontalAxis>
-                            <telerikChart:CategoricalAxis Style="{StaticResource baseAxisStyle}"  />
-                        </telerikChart:RadCartesianChart.HorizontalAxis>
-                        <telerikChart:RadCartesianChart.VerticalAxis>
-                            <telerikChart:LinearAxis Minimum="0"
-                                         Maximum="12"
-                                         MajorStep="1"
-                                         LineStroke="Transparent"
-                                         Style="{StaticResource linearAxisStyle}"/>
-                        </telerikChart:RadCartesianChart.VerticalAxis>
-
-                        <telerikChart:BarSeries>
-                            <telerikChart:BarSeries.PointTemplates>
-                                <DataTemplate>
-                                    <Border Background="Blue"
-                                BorderThickness="2"/>
-                                </DataTemplate>
-
-                                <DataTemplate>
-                                    <Border Background="Blue"
-                                BorderThickness="2"/>
-                                </DataTemplate>
-
-                                <DataTemplate>
-                                    <Border Background="Blue"
-                                BorderThickness="2"/>
-                                </DataTemplate>
-
-                                <DataTemplate>
-                                    <Border Background="Blue"
-                                BorderThickness="2"/>
-                                </DataTemplate>
-
-                                <DataTemplate>
-                                    <Border Background="Blue"
-                                BorderThickness="2"/>
-                                </DataTemplate>
-
-                                <DataTemplate>
-                                    <Border Background="Blue"
-                                BorderThickness="2"/>
-                                </DataTemplate>
-                            </telerikChart:BarSeries.PointTemplates>
-                        </telerikChart:BarSeries>
-                    </telerikChart:RadCartesianChart>
+                    <local:SleepHoursControl/>
                 </Grid>
             </phone:PivotItem>
 

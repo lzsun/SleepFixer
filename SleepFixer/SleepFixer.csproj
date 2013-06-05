@@ -126,8 +126,14 @@
     <Compile Include="StatsControl\SleepHoursByDayControl.xaml.cs">
       <DependentUpon>SleepHoursByDayControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatsControl\SleepHoursControl.xaml.cs">
+      <DependentUpon>SleepHoursControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StatsControl\SleepScoreControl.xaml.cs">
       <DependentUpon>SleepScoreControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatsControl\SleepTimeControl.xaml.cs">
+      <DependentUpon>SleepTimeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="StatsPage.xaml.cs">
       <DependentUpon>StatsPage.xaml</DependentUpon>
@@ -162,7 +168,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="StatsControl\SleepHoursControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StatsControl\SleepScoreControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatsControl\SleepTimeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

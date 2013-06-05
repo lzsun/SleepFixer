@@ -12,22 +12,11 @@
     d:DesignHeight="580" d:DesignWidth="480">
     
     <Grid x:Name="LayoutRoot">
-        <Grid.Resources>
-            <SolidColorBrush x:Key="Brush0" Color="Gold"/>
-            <SolidColorBrush x:Key="Brush1" Color="Turquoise"/>
-            <SolidColorBrush x:Key="Brush2" Color="LimeGreen"/>
-            <SolidColorBrush x:Key="Brush3" Color="Orange"/>
-            <SolidColorBrush x:Key="Brush4" Color="Pink"/>
-
-            <Style x:Key="BasePieStyle" TargetType="Path">
-                <Setter Property="StrokeThickness" Value="2"/>
-                <Setter Property="Stroke" Value="{StaticResource PhoneForegroundBrush}"/>
-            </Style>
-        </Grid.Resources>
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -56,7 +45,10 @@
             <Image Source="/Images/mood.5.png" Grid.Column="9"/>
         </Grid>
         <telerikChart:RadPieChart x:Name="radPieChart" Grid.Row="1" Margin="12">
-            <telerikChart:PieSeries>
+            <telerikChart:RadPieChart.Behaviors>
+                <telerikChart:ChartSelectionBehavior/>
+            </telerikChart:RadPieChart.Behaviors>
+            <telerikChart:PieSeries RadiusFactor="0.85" SelectedPointOffset="0.15">
                 <telerikChart:PieSeries.SliceStyles>
                     <Style BasedOn="{StaticResource BasePieStyle}"
                                TargetType="Path">
@@ -90,7 +82,8 @@
                 </telerikChart:PieSeries.LabelTemplate>
             </telerikChart:PieSeries>
         </telerikChart:RadPieChart>
-        <Grid Grid.Row="2">
+        <TextBlock Text="Average of:" Grid.Row="2"/>
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -100,7 +93,7 @@
             <RadioButton Grid.Column="1" Content="Month" Click="Month_Click"/>
             <RadioButton Grid.Column="2" Content="Year" Click="Year_Click"/>
         </Grid>
-        <Grid Grid.Row="3">
+        <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>

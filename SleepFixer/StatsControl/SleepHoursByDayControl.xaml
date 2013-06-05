@@ -5,7 +5,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:telerikChart="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Chart"
     xmlns:telerikCharting="clr-namespace:Telerik.Charting;assembly=Telerik.Windows.Controls.Chart"
-        xmlns:local="clr-namespace:SleepFixer"
+    xmlns:local="clr-namespace:SleepFixer"
     mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -13,53 +13,7 @@
     d:DesignHeight="580" d:DesignWidth="480">
     
     <UserControl.Resources>
-        <SolidColorBrush x:Key="Series1Brush" Color="{StaticResource PhoneForegroundColor}"/>
-        <SolidColorBrush x:Key="Series2Brush" Color="#FF5B00"/>
-        <SolidColorBrush x:Key="Series3Brush" Color="#5342D2"/>
-        <SolidColorBrush x:Key="Series4Brush" Color="#00B8FF"/>
-        <SolidColorBrush x:Key="Series5Brush" Color="#8B232E"/>
-        <SolidColorBrush x:Key="Series6Brush" Color="#17F8C0"/>
-        <SolidColorBrush x:Key="Series7Brush" Color="#FF4F3F"/>
-        <SolidColorBrush x:Key="Series8Brush" Color="#13CC60"/>
-
-        <SolidColorBrush x:Key="Series1BorderBrush" Color="{StaticResource PhoneForegroundColor}"/>
-        <SolidColorBrush x:Key="Series2BorderBrush" Color="#FF9730"/>
-        <SolidColorBrush x:Key="Series3BorderBrush" Color="#8282F9"/>
-        <SolidColorBrush x:Key="Series4BorderBrush" Color="#3AE8FF"/>
-        <SolidColorBrush x:Key="Series5BorderBrush" Color="#963241"/>
-        <SolidColorBrush x:Key="Series6BorderBrush" Color="#92FFF1"/>
-        <SolidColorBrush x:Key="Series7BorderBrush" Color="#FF8680"/>
-        <SolidColorBrush x:Key="Series8BorderBrush" Color="#48FF92"/>
-
-        <SolidColorBrush x:Key="GrayedBrush" Color="{StaticResource PhoneSubtleColor}"/>
-
-        <Style x:Key="textBlockStyle" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="14"/>
-        </Style>
-
-        <Style x:Key="baseAxisStyle" TargetType="telerikChart:Axis">
-            <Setter Property="MajorTickStyle">
-                <Setter.Value>
-                    <Style TargetType="Rectangle">
-                        <Setter Property="Fill" Value="Transparent"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="LineStroke" Value="{StaticResource GrayedBrush}"/>
-            <Setter Property="LabelStyle" Value="{StaticResource textBlockStyle}"/>
-        </Style>
-
-        <Style x:Key="linearAxisStyle" TargetType="telerikChart:LinearAxis" BasedOn="{StaticResource baseAxisStyle}">
-            <Setter Property="LabelStyle">
-                <Setter.Value>
-                    <Style TargetType="TextBlock"  BasedOn="{StaticResource textBlockStyle}">
-                        <Setter Property="FontWeight" Value="Bold"/>
-                        <Setter Property="Margin" Value="0,2,10,3"/>
-                    </Style>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
+        
         <local:BarLabelTemplateSelector x:Key="labelTemplateSelector">
             <local:BarLabelTemplateSelector.Templates>
                 <DataTemplate>
@@ -87,9 +41,10 @@
         </local:BarLabelTemplateSelector>
     </UserControl.Resources>
     
-    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
+    <Grid x:Name="LayoutRoot">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -103,18 +58,14 @@
                 </telerikChart:CartesianChartGrid>
             </telerikChart:RadCartesianChart.Grid>
             <telerikChart:RadCartesianChart.HorizontalAxis>
-                <telerikChart:CategoricalAxis Style="{StaticResource baseAxisStyle}" 
-                                              LabelTemplateSelector="{StaticResource labelTemplateSelector}"/>
-
+                <telerikChart:CategoricalAxis Style="{StaticResource baseAxisStyle}" LabelTemplateSelector="{StaticResource labelTemplateSelector}"/>
             </telerikChart:RadCartesianChart.HorizontalAxis>
             <telerikChart:RadCartesianChart.VerticalAxis>
                 <telerikChart:LinearAxis Minimum="0"
                                          Maximum="12"
                                          MajorStep="2"
-                                         LineStroke="Transparent"
                                          Style="{StaticResource linearAxisStyle}"/>
             </telerikChart:RadCartesianChart.VerticalAxis>
-
             <telerikChart:BarSeries ShowLabels="True">
                 <telerikChart:BarSeries.PointTemplates>
                     <DataTemplate>
@@ -161,7 +112,8 @@
                 </telerikChart:BarSeries.PointTemplates>
             </telerikChart:BarSeries>
         </telerikChart:RadCartesianChart>
-        <Grid Grid.Row="1">
+        <TextBlock Text="Average of:" Grid.Row="1"/>
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -171,7 +123,7 @@
             <RadioButton Grid.Column="1" Content="Month" Click="Month_Click"/>
             <RadioButton Grid.Column="2" Content="Year" Click="Year_Click"/>
         </Grid>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
