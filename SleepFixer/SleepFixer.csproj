@@ -108,7 +108,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MoodControl.xaml.cs">
+    <Compile Include="StatsControl\MoodControl.xaml.cs">
       <DependentUpon>MoodControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,8 +123,11 @@
     <Compile Include="SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="SleepHoursByDayControl.xaml.cs">
+    <Compile Include="StatsControl\SleepHoursByDayControl.xaml.cs">
       <DependentUpon>SleepHoursByDayControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatsControl\SleepScoreControl.xaml.cs">
+      <DependentUpon>SleepScoreControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="StatsPage.xaml.cs">
       <DependentUpon>StatsPage.xaml</DependentUpon>
@@ -148,14 +151,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MoodControl.xaml">
+    <Page Include="StatsControl\MoodControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SettingsPage.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="SleepHoursByDayControl.xaml">
+    <Page Include="StatsControl\SleepHoursByDayControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StatsControl\SleepScoreControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
