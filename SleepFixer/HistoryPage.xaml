@@ -27,6 +27,14 @@
                     </Grid>
                 </DataTemplate>
             </local:MoodSelector.MoodTemplate>
+            <local:MoodSelector.MoodTemplate0>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="{Binding DetailText}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,0,2,0" TextAlignment="Right" FontSize="18" Foreground="LightBlue" />
+                        <TextBlock Text="{Binding Text}" FontWeight="Bold" VerticalAlignment="Bottom" FontSize="{StaticResource PhoneFontSizeSmall}" Margin="2,0,0,0" HorizontalAlignment="Left" />
+                    </Grid>
+                </DataTemplate>
+            </local:MoodSelector.MoodTemplate0>
             <local:MoodSelector.MoodTemplate1>
                 <DataTemplate>
                     <Grid>
@@ -112,7 +120,7 @@
         <!--<ListBox x:Name="resultList" Grid.Row="1" Margin="50,0,50,0"/>-->
 
         <!--ContentPanel - place additional content here-->
-        <telerikInput:RadCalendar x:Name="radCalendar" Grid.Row="1" Height="560" Margin="10" MonthInfoDisplayMode="Small"
+        <telerikInput:RadCalendar x:Name="radCalendar" Grid.Row="1" Height="590" Margin="10" MonthInfoDisplayMode="Small"
                                   ItemTemplateSelector="{StaticResource WeekendDaySelector}"
                                   DisplayDateChanged="radCalendar_DisplayDateChanged"
                                   ItemTap="radCalendar_ItemTap">
@@ -138,13 +146,16 @@
                             <TextBlock Text="Sleep Time:"/>
                             <TextBlock Text="Wakeup Time:"/>
                             <TextBlock Text="Sleep Hours:"/>
+                            <TextBlock Text="Nap Hours:"/>
                             <TextBlock Text="Mood:"/>
                         </StackPanel>
                         <StackPanel Orientation="Vertical" Grid.Column="1">
                             <TextBlock x:Name="DetailSleepTime"/>
                             <TextBlock x:Name="DetailWakeupTime"/>
                             <TextBlock x:Name="DetailSleepHours"/>
+                            <TextBlock x:Name="DetailNapHours"/>
                             <Image x:Name="DetailMood" Height="48" HorizontalAlignment="Left"/>
+                            
                         </StackPanel>
                     </Grid>
                     <Button Content="OK" Click="OK_Click"/>
@@ -161,9 +172,6 @@
         </telerikPrimitives:RadModalWindow>
 
 
-        <Grid  x:Name="ContentPanel" Grid.Row="3" >
-            <Button Click="Random_Click" Content="Random" VerticalAlignment="Center" Grid.Column="0" FontSize="14"/>
-        </Grid>
 
         
         <!--Uncomment to see an alignment grid to help ensure your controls are

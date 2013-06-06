@@ -38,7 +38,7 @@
                     </Grid>
                 </phone:PivotItem.Header>
                 <Grid>
-                    <local:SleepScoreControl/>
+                    <local:SleepScoreControl x:Name="sleepScoreControl"/>
                 </Grid>
             </phone:PivotItem>
 
@@ -49,7 +49,7 @@
                     </Grid>
                 </phone:PivotItem.Header>
                 <Grid>
-                    <local:SleepTimeControl/>
+                    <local:SleepTimeControl x:Name="sleepTimeControl"/>
                 </Grid>
             </phone:PivotItem>
 
@@ -61,7 +61,7 @@
                     </Grid>
                 </phone:PivotItem.Header>
                 <Grid>
-                    <local:SleepHoursControl/>
+                    <local:SleepHoursControl x:Name="sleepHoursControl"/>
                 </Grid>
             </phone:PivotItem>
 
@@ -72,7 +72,7 @@
                     </Grid>
                 </phone:PivotItem.Header>
                 <Grid>
-                    <local:SleepHoursByDayControl/>
+                    <local:SleepHoursByDayControl x:Name="sleepHoursByDayControl"/>
                 </Grid>
             </phone:PivotItem>
 
@@ -83,7 +83,7 @@
                     </Grid>
                 </phone:PivotItem.Header>
                 <Grid>
-                    <local:MoodControl/>
+                    <local:MoodControl x:Name="moodControl"/>
                 </Grid> 
             </phone:PivotItem>
         </phone:Pivot>

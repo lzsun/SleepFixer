@@ -91,7 +91,7 @@ namespace SleepFixer
             Calc();
         }
 
-        private void Calc()
+        public void Calc()
         {
             LinkedList<SleepData> calcData = new LinkedList<SleepData>();
             double[] hourData = { 0, 0, 0, 0, 0 ,0, 0};

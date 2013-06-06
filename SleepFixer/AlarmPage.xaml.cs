@@ -31,7 +31,7 @@ namespace SleepFixer
 
 
         private bool isSleepSet = false;
-        private int state;
+        public static int state; //0: waiting 1:alarming 2:snoozing
 
         private SoundEffectInstance alarmSound;
 
@@ -228,8 +228,12 @@ namespace SleepFixer
         private void Back_Click(object sender, RoutedEventArgs e)
         {
             timer.Stop();
-            if(state == 0)
+            if (state == 0)
+            {
                 NavigationService.Navigate(new Uri("/MainPage.xaml", UriKind.Relative));
+                state = -1;
+            }
+                
             if (SettingsPage.holdToStop.Value == false)
             {
                 if (state == 1)
@@ -237,12 +241,14 @@ namespace SleepFixer
                     alarmSound.Stop();
                     wakeupTime = DateTime.Now.TimeOfDay;
                     window.IsOpen = true;
+                    state = -1;
                 }
                 else if (state == 2)
                 {
                     alarmSound.Stop();
                     wakeupTime = DateTime.Now.TimeOfDay;
                     window.IsOpen = true;
+                    state = -1;
                 }
             }
             
@@ -295,8 +301,8 @@ namespace SleepFixer
 
         private void back_Hold(object sender, System.Windows.Input.GestureEventArgs e)
         {
+            timer.Stop();
             
-
             if (SettingsPage.holdToStop.Value == true)
             {
                 if (state == 1)
@@ -304,12 +310,14 @@ namespace SleepFixer
                     alarmSound.Stop();
                     wakeupTime = DateTime.Now.TimeOfDay;
                     window.IsOpen = true;
+                    state = -1;
                 }
                 else if (state == 2)
                 {
                     alarmSound.Stop();
                     wakeupTime = DateTime.Now.TimeOfDay;
                     window.IsOpen = true;
+                    state = -1;
                 }
             }
         }

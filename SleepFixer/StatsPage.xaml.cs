@@ -20,6 +20,15 @@ namespace SleepFixer
 
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            sleepHoursByDayControl.Calc();
+            moodControl.Calc();
+            sleepHoursControl.update();
+            sleepScoreControl.update();
+            sleepTimeControl.update();
+        }
         
     }
 }

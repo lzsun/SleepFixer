@@ -17,6 +17,8 @@ namespace SleepFixer
         public SleepTimeControl()
         {
             InitializeComponent();
+            //(radChart.VerticalAxis as LineAxis).Minimum = DateTime.Today.AddHours(-8).ToOADate();
+            //(radChart.VerticalAxis as LineAxis).Maximum = DateTime.Today.AddHours(16).ToOADate();
             update();
         }
 
@@ -31,7 +33,7 @@ namespace SleepFixer
             int IComparer<T>.Compare(T x, T y) { return inner.Compare(y, x); }
         }
 
-        private void update()
+        public void update()
         {
             SortedDictionary<DateTime, TimeSpan> sleep_map = new SortedDictionary<DateTime, TimeSpan>(new ReverseComparer<DateTime>());
             SortedDictionary<DateTime, TimeSpan> wake_map = new SortedDictionary<DateTime, TimeSpan>(new ReverseComparer<DateTime>());
@@ -54,7 +56,7 @@ namespace SleepFixer
             foreach (KeyValuePair<DateTime, TimeSpan> data in sleep_map)
             {
                 CategoricalDataPoint dp = new CategoricalDataPoint();
-                dp.Value = data.Value.TotalHours > 12 ? data.Value.TotalHours - 24 : data.Value.TotalHours;
+                dp.Value = data.Value.TotalHours > 16 ? data.Value.TotalHours - 24 : data.Value.TotalHours;
                 dp.Category = data.Key;
                 dp.Label = data.Value.ToString(@"hh\:mm");
                 (radChart.Series[0] as LineSeries).DataPoints.Add(dp);
@@ -64,7 +66,8 @@ namespace SleepFixer
             foreach (KeyValuePair<DateTime, TimeSpan> data in wake_map)
             {
                 CategoricalDataPoint dp = new CategoricalDataPoint();
-                dp.Value = data.Value.TotalHours > 12 ? data.Value.TotalHours - 24 : data.Value.TotalHours;
+                dp.Value = data.Value.TotalHours > 16 ? data.Value.TotalHours - 24 : data.Value.TotalHours;
+                //dp.Value = DateTime.Today.AddHours(hours).ToOADate();
                 dp.Category = data.Key;
                 dp.Label = data.Value.ToString(@"hh\:mm");
                 (radChart.Series[1] as LineSeries).DataPoints.Add(dp);

@@ -59,7 +59,7 @@ namespace SleepFixer
         }
 
         [XmlAttribute("Mood")]
-        public int Mood;
+        public int Mood = 0;
 
         [XmlAttribute("IsNap")]
         public bool IsNap;

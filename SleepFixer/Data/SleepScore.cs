@@ -90,7 +90,7 @@ namespace SleepFixer
             
 
             VarHours = SleepScore.CalculateStdDev(new List<double>(data_map.Values));
-            VarHoursScore = 1 - SleepScore.ConvertScore(VarHours,0,2.5);
+            VarHoursScore = 1 - SleepScore.ConvertScore(VarHours,0,2);
         }
 
         private static void CalcAvgBedTime(LinkedList<SleepData> CalcData)
@@ -122,7 +122,7 @@ namespace SleepFixer
             }
             
             VarBedTime = SleepScore.CalculateStdDev(data_map);
-            VarBedTimeScore = SleepScore.ConvertScore(VarBedTime,0,2.5);
+            VarBedTimeScore = 1 - SleepScore.ConvertScore(VarBedTime, 0, 2.5);
         }
 
         private static void CalcAvgMood(LinkedList<SleepData> CalcData)

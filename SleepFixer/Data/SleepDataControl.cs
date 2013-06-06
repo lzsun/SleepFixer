@@ -86,26 +86,6 @@ namespace SleepFixer
             SaveJogs();
         }
 
-        //Generate Random Data
-        public static void Random()
-        {
-            DateTime wake = new DateTime(2013, 1, 1, 6, 0, 0);
-            DateTime sleep = new DateTime(2013, 1, 1, 22, 0, 0);
-            Random r = new Random();
-            jogs = new SleepDataRoot();
-            for (int i = 0; i < 150; i++)
-            {
-                SleepData s = new SleepData(
-                    wake.AddDays(i),         
-                    sleep.AddMinutes(r.Next(0, 240)).TimeOfDay,
-                    wake.AddMinutes(r.Next(0, 240)).TimeOfDay,
-                    r.Next(1,6),
-                    false);
-                jogs.Sleep.Add(s);
-            }
-            SaveJogs();
-        }
-
         public static Boolean checkExist(DateTime date)
         {
             foreach (SleepData data in jogs.Sleep)
@@ -116,7 +96,77 @@ namespace SleepFixer
             return false;
         }
 
+        //Generate Random Data
+        public static void Random()
+        {
+            jogs = new SleepDataRoot();
 
+            double[] mood1 = { 0.25, 0.55, 0.75, 0.95, 1 };
+            random(new DateTime(2013, 1, 1, 0, 0, 0),
+                new DateTime(2013, 1, 31, 0, 0, 0),
+                23, 5,
+                5.5, 3,
+                mood1, false);
+
+            double[] mood2 = { 0.2, 0.45, 0.7, 0.85, 1 };
+            random(new DateTime(2013, 2, 1, 0, 0, 0),
+                new DateTime(2013, 2, 28, 0, 0, 0),
+                22, 4,
+                6.5, 3,
+                mood2, false);
+
+            double[] mood3 = { 0.15, 0.35, 0.55, 0.85, 1 };
+            random(new DateTime(2013, 3, 1, 0, 0, 0),
+                new DateTime(2013, 3, 31, 0, 0, 0),
+                22.5, 2.5,
+                7, 2,
+                mood3, false);
+
+            double[] mood4 = { 0.1, 0.2, 0.4, 0.7, 1 };
+            random(new DateTime(2013, 4, 1, 0, 0, 0),
+                new DateTime(2013, 4, 30, 0, 0, 0),
+                22, 2,
+                7.5, 1.5,
+                mood4, false);
+
+            double[] mood5 = { 0.05, 0.15, 0.25, 0.5, 1 };
+            random(new DateTime(2013, 5, 1, 0, 0, 0),
+                new DateTime(2013, 5, 31, 0, 0, 0),
+                22.5, 1.5,
+                7, 1.25,
+                mood5, false);
+
+            random(new DateTime(2013, 5, 1, 0, 0, 0),
+                new DateTime(2013, 5, 31, 0, 0, 0),
+                13, 0.5,
+                0.75, 0.5,
+                mood5, true);
+
+            SaveJogs();
+        }
+
+        private static void random(DateTime start, DateTime end, double time, double timeRange, double hour, double hourRange, double[] moodRange, bool isNap)
+        {
+            Random r = new Random();
+            for (DateTime i = start; i <= end; i = i.AddDays(1))
+            {
+                double mood = r.NextDouble();
+                for (int j = 0; j < moodRange.Length; j++)
+                {
+                    if (mood < moodRange[j])
+                        mood = j + 1;
+                }
+                TimeSpan sleepTime = DateTime.Today.AddHours(time + r.NextDouble() * timeRange).TimeOfDay;
+                SleepData s = new SleepData(
+                    i,
+                    sleepTime,
+                    DateTime.Today.Add(sleepTime).AddHours(hour + r.NextDouble() * hourRange).TimeOfDay,
+                    Convert.ToInt32(mood),
+                    isNap);
+                jogs.Sleep.Add(s);
+            }
+
+        }
        
     }
 }

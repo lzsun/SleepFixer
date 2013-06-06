@@ -38,7 +38,7 @@ namespace SleepFixer
             int IComparer<T>.Compare(T x, T y) { return inner.Compare(y, x); }
         }
         
-        private void update()
+        public void update()
         {
             SortedDictionary<DateTime, double> data_map = new SortedDictionary<DateTime, double>(new ReverseComparer<DateTime>());
             

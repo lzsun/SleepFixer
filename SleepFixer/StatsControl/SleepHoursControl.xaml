@@ -30,7 +30,7 @@
                         Style="{StaticResource CategoricalAxisStyle}"/>
             </telerikChart:RadCartesianChart.HorizontalAxis>
             <telerikChart:RadCartesianChart.VerticalAxis>
-                <telerikChart:LinearAxis RangeExtendDirection="Positive" Minimum="0"/>
+                <telerikChart:LinearAxis RangeExtendDirection="Positive" Minimum="0" Maximum="12"/>
             </telerikChart:RadCartesianChart.VerticalAxis>
             <telerikChart:RadCartesianChart.Grid>
                 <telerikChart:CartesianChartGrid MajorLinesVisibility="Y" Style="{StaticResource gridStyleDashedAll}"/>

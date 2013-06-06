@@ -87,7 +87,7 @@ namespace SleepFixer
 
         private void TryAddAlarmScheduler()
         {
-            if (true)
+            if (AlarmPage.state == 0)
             //if (Settings.alarmSet.Value)
             {
                 try

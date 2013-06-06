@@ -41,7 +41,7 @@ namespace SleepFixer
             update();
         }
 
-        private void update()
+        public void update()
         {
             Text_Date.Text = datePick.ToString("MMM yyyy");
             double score = SleepScore.CalcScore(datePick, datePick.AddMonths(1).AddDays(-1));

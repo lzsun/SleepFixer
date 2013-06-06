@@ -137,6 +137,11 @@ namespace SleepFixer
             
             
         }
+
+        private void Random_Click(object sender, RoutedEventArgs e)
+        {
+            SleepDataControl.Random();
+        }
        
     }
 }

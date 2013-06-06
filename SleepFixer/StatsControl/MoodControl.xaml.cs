@@ -89,7 +89,7 @@ namespace SleepFixer
             Calc();
         }
 
-        private void Calc()
+        public void Calc()
         {
             LinkedList<SleepData> calcData = new LinkedList<SleepData>();
             int[] moodData = {0,0,0,0,0};

@@ -28,10 +28,12 @@
                 <telerikChart:ChartTrackBallBehavior ShowTrackInfo="True" ShowIntersectionPoints="True" TrackInfoUpdated="ChartTrackBallBehavior_TrackInfoUpdated"/>
             </telerikChart:RadCartesianChart.Behaviors>
             <telerikChart:RadCartesianChart.HorizontalAxis>
-                <telerikChart:DateTimeContinuousAxis Style="{StaticResource baseAxisStyle}" LabelFitMode="Rotate" LabelFormat="MMM-dd-yy" MajorStep="7" MajorStepUnit="Day" PlotMode="OnTicks"/>
+                <telerikChart:DateTimeContinuousAxis Style="{StaticResource baseAxisStyle}" LabelFitMode="Rotate" LabelFormat="MMM-dd-yy" MajorStep="2" MajorStepUnit="Week" PlotMode="OnTicks"/>
+                <!--<telerikChart:DateTimeCategoricalAxis Style="{StaticResource baseAxisStyle}" LabelFitMode="Rotate" LabelFormat="MMM-dd-yy" PlotMode="OnTicks"/>-->
             </telerikChart:RadCartesianChart.HorizontalAxis>
             <telerikChart:RadCartesianChart.VerticalAxis>
-                <telerikChart:LinearAxis MajorStep="4" Minimum="-8" Maximum="16" Style="{StaticResource linearAxisStyleWithTicks}"/>
+                <!--<telerikChart:DateTimeContinuousAxis Style="{StaticResource baseAxisStyle}" LabelFitMode="Rotate" LabelFormat="MMM-dd-HH-mm" MajorStep="4" MajorStepUnit="Hour" PlotMode="OnTicks"/>-->
+                <telerikChart:LinearAxis Style="{StaticResource linearAxisStyleWithTicks}"  MajorStep="4" Minimum="-8" Maximum="16" LabelFormat="00':00'"/>
             </telerikChart:RadCartesianChart.VerticalAxis>
             <telerikChart:RadCartesianChart.Grid>
                 <telerikChart:CartesianChartGrid MajorLinesVisibility="Y" Style="{StaticResource gridStyleDashedAll}"/>
