@@ -29,6 +29,7 @@ namespace SleepFixer
         public static readonly StoredItem<bool> holdToStop = new StoredItem<bool>("holdToStop", true);
         public static readonly StoredItem<int> snoozeTime = new StoredItem<int>("snoozeTime", 5);
         public static readonly StoredItem<bool> enableVibration = new StoredItem<bool>("enableVibration", true);
+        public static readonly StoredItem<double> sleepHour = new StoredItem<double>("sleepHour", 8);
         
         
         
@@ -67,6 +68,7 @@ namespace SleepFixer
             //SettingsPage.alarmstopstyle.Value = this.alarmstopstyleToggleSwitch.IsChecked.Value;
             SettingsPage.snoozeTime.Value = Convert.ToInt32(this.snoozeslider.Value);
             SettingsPage.holdToStop.Value = this.holdToggleSwitch.IsChecked.Value;
+            SettingsPage.sleepHour.Value = Convert.ToDouble(this.sleepSlider.Value);
 
 
 
@@ -85,6 +87,7 @@ namespace SleepFixer
             //this.alarmstopstyleToggleSwitch.IsChecked = SettingsPage.alarmstopstyle.Value;
             this.holdToggleSwitch.IsChecked = SettingsPage.holdToStop.Value;
             this.snoozeslider.Value = SettingsPage.snoozeTime.Value;
+            this.sleepSlider.Value = SettingsPage.sleepHour.Value;
            
 
             this.hourFmtToggleSwitch.Content = SettingsPage.is24Hr.Value ?
@@ -141,6 +144,15 @@ namespace SleepFixer
         private void Random_Click(object sender, RoutedEventArgs e)
         {
             SleepDataControl.Random();
+        }
+
+        private void sleepSlider_ValueChanged_1(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (sleepText != null)
+            {
+                sleepSlider.Value = Math.Round(sleepSlider.Value*2)/2;
+                sleepText.Text = "Desired Sleep Hours: " + sleepSlider.Value.ToString() + " hours";
+            }
         }
        
     }

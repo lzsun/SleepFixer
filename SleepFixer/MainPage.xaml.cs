@@ -47,6 +47,13 @@ namespace SleepFixer
             SleepDataControl.LoadJogs();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (AlarmPage.state == 0)
+               this.NavigationService.Navigate(new Uri("/AlarmPage.xaml?alarm=-1", UriKind.Relative));
+        }
+
 
 
         private void timer_Tick(object sender, EventArgs e)

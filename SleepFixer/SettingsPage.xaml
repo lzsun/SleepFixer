@@ -48,13 +48,12 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <toolkit:ToggleSwitch x:Name="hourFmtToggleSwitch" Content="24 Hour Clock: ON" 
                                           Grid.Row="0" IsChecked="True" FontSize="24"
@@ -73,9 +72,13 @@
                                           Grid.Row="3" IsChecked="True" FontSize="24"
                                           Unchecked="Displayslider"
                                           Checked="Hideslider"/>-->
-                    <StackPanel x:Name="snooze" Grid.Row="4" Orientation="Vertical">
+                    <StackPanel x:Name="snooze" Grid.Row="3" Orientation="Vertical">
                         <TextBlock Text="Snooze Time: 1 mins" x:Name="snoozetext" Margin="10,20,0,0" FontSize="24"/>
-                        <Slider x:Name="snoozeslider" Minimum="1" Maximum="15" Width="400" ValueChanged="Snooze_ValueChanged"/>
+                        <Slider x:Name="snoozeslider" Minimum="1" Maximum="15" Width="400" ValueChanged="Snooze_ValueChanged" Margin="0 0 0 -20"/>
+                    </StackPanel>
+                    <StackPanel x:Name="sleep" Grid.Row="4" Orientation="Vertical">
+                        <TextBlock Text="Desired Sleep Hours: 8" x:Name="sleepText" Margin="10,20,0,0" FontSize="24"/>
+                        <Slider x:Name="sleepSlider" Minimum="6" Maximum="12" Width="400" ValueChanged="sleepSlider_ValueChanged_1" Margin="0 0 0 -20"/>
                     </StackPanel>
                     <Button Click="Random_Click" Content="Test: Random Data" Grid.Row="5"/>
                     <!--<Grid Grid.Row="4">        

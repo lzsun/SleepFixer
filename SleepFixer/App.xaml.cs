@@ -87,19 +87,35 @@ namespace SleepFixer
 
         private void TryAddAlarmScheduler()
         {
+            TryRemoveAlarmScheduler();
             if (AlarmPage.state == 0)
-            //if (Settings.alarmSet.Value)
             {
-                try
+                if (DateTime.Now >= AlarmPage.sleepAlarm.BeginTime)
                 {
-                    ScheduledActionService.Add(AlarmPage.alarm);
+                    try
+                    {
+                        ScheduledActionService.Add(AlarmPage.alarm);
+                    }
+                    catch (Exception)
+                    {
+                        // Do nothing. 
+                        // Only to prevent the ScheduledActionService from adding the alarm member variable more than once.
+                    }
                 }
-                catch (Exception)
+                else
                 {
-                    // Do nothing. 
-                    // Only to prevent the ScheduledActionService from adding the alarm member variable more than once.
+                    try
+                    {
+                        ScheduledActionService.Add(AlarmPage.sleepAlarm);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Do nothing. 
+                        // Only to prevent the ScheduledActionService from adding the alarm member variable more than once.
+                    }
                 }
             }
+                
         }
 
         private void TryRemoveAlarmScheduler()
@@ -109,11 +125,20 @@ namespace SleepFixer
                 // Leave "alarm" as is.
                 // Do not try to replace it with Clock.alarm.Name, which is actually null until the AlarmPage gets initialized.
                 ScheduledActionService.Remove("alarm");
+                
             }
             catch (Exception)
             {
                 // Do nothing. 
                 // Only to prevent the ScheduledActionService from adding the alarm member variable more than once.
+            }
+            try
+            {
+                ScheduledActionService.Remove("bedtime");
+            }
+            catch (Exception)
+            {
+
             }
         }
 

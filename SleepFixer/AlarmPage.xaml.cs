@@ -28,10 +28,11 @@ namespace SleepFixer
         private TimeSpan sleepTime;
         private TimeSpan wakeupTime;
         public static Alarm alarm;
+        public static Alarm sleepAlarm;
 
 
         private bool isSleepSet = false;
-        public static int state; //0: waiting 1:alarming 2:snoozing
+        public static int state = -1; //0: waiting 1:alarming 2:snoozing
 
         private SoundEffectInstance alarmSound;
 
@@ -118,7 +119,9 @@ namespace SleepFixer
             //Start Alarm
             state = 0;
             isSleepSet = false;
-            alarmTime = new DateTime(Convert.ToInt64(NavigationContext.QueryString["alarm"]));
+            long alarmString = Convert.ToInt64(NavigationContext.QueryString["alarm"]);
+            if(alarmString >=0)
+                alarmTime = new DateTime(alarmString);
             sleepTime = DateTime.Now.TimeOfDay;
             timer.Start();
 
@@ -134,6 +137,15 @@ namespace SleepFixer
             AlarmPage.alarm.RecurrenceType = RecurrenceInterval.None;
             AlarmPage.alarm.Sound = new Uri("Audio/alarm.wav", UriKind.Relative);
             AlarmPage.alarm.Content = "Alarm ringing!";
+
+            AlarmPage.sleepAlarm = new Alarm("bedtime");
+            //AlarmPage.sleepAlarm.BeginTime = alarmTime.AddHours(-1* SettingsPage.sleepHour.Value);
+            AlarmPage.sleepAlarm.BeginTime = alarmTime.AddMinutes(-1 * SettingsPage.sleepHour.Value);
+            //AlarmPage.sleepAlarm.BeginTime = alarmTime.AddMinutes(-1);
+            AlarmPage.sleepAlarm.ExpirationTime = DateTime.MaxValue;
+            AlarmPage.sleepAlarm.RecurrenceType = RecurrenceInterval.None;
+            AlarmPage.sleepAlarm.Sound = new Uri("Audio/alarm.wav", UriKind.Relative);
+            AlarmPage.sleepAlarm.Content = "Time to sleep! Please relaunch Sleep Fixer.";
             
 
             //Motion
@@ -193,37 +205,6 @@ namespace SleepFixer
             }
         }
 
-
-        /*/// <summary>
-        /// Snooze function
-        /// Also need to stop alarm,
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Snooze(object sender, RoutedEventArgs e)
-        {
-            DateTime begin = Convert.ToDateTime(remainText.Text);
-            Alarm a = new Alarm("snooze");
-            a.BeginTime = begin;
-            a.ExpirationTime = begin.AddMinutes(8.0);
-            //a.Sound = 
-            remainText.Text = (begin.AddMinutes(8.0)).ToString();
-            //Txb_timedisplay.Text = (a.ExpirationTime.AddMinutes(8.0)).ToString();
-        }
-
-
-        /// <summary>
-        /// Stop the alarm
-        /// Go back to the homepage, not sure this code will work or not
-        /// Following the format on windows phone
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Stop_Click(object sender, RoutedEventArgs e)
-        {
-            //timer.Stop();
-            NavigationService.Navigate(new Uri("blabla.xaml", UriKind.Relative));
-        }*/
 
         private void Back_Click(object sender, RoutedEventArgs e)
         {
